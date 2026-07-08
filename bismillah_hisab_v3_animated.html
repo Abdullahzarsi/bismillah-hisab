@@ -1,0 +1,2216 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>বিসমিল্লাহ বস্ত্র বিতান</title>
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Noto+Serif+Bengali:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --sidebar-w: 240px;
+  --topbar-h: 64px;
+  --bg: #f8f7ff;
+  --surface: #ffffff;
+  --border: #ede8f5;
+  --accent: #7c5cbf;
+  --accent2: #6244aa;
+  --accent-light: #f0eaff;
+  --pink: #f06292;
+  --pink-light: #fce4ec;
+  --pink-bg: #ff7eb3;
+  --yellow: #f9a825;
+  --yellow-light: #fff8e1;
+  --yellow-bg: #ffcc02;
+  --green: #26c281;
+  --green-light: #e8faf3;
+  --green-bg: #00c896;
+  --red: #ef5350;
+  --red-light: #ffebee;
+  --blue: #5b86e5;
+  --blue-light: #e8eeff;
+  --purple: #9c6fde;
+  --purple-light: #f3eeff;
+  --text: #1a1340;
+  --text2: #6b6386;
+  --text3: #a89ec4;
+  --sidebar-bg: #ffffff;
+  --sidebar-text: #6b6386;
+  --sidebar-active: #7c5cbf;
+  --sidebar-active-bg: #f0eaff;
+  --shadow-sm: 0 2px 8px rgba(124,92,191,0.06);
+  --shadow: 0 4px 20px rgba(124,92,191,0.10);
+  --shadow-md: 0 8px 32px rgba(124,92,191,0.14);
+  --radius: 16px;
+  --radius-sm: 10px;
+}
+
+body {
+  font-family: 'Hind Siliguri', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  display: flex;
+  overflow-x: hidden;
+}
+
+/* page bg gradient */
+body::before {
+  content:'';
+  position:fixed;
+  top:0;left:0;right:0;
+  height:280px;
+  background: linear-gradient(135deg, #e8d5ff 0%, #ffdce8 40%, #fff6cc 100%);
+  z-index:0;
+  pointer-events:none;
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar {
+  width: var(--sidebar-w);
+  background: var(--sidebar-bg);
+  min-height: 100vh;
+  position: fixed;
+  top: 0; left: 0; bottom: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 200;
+  transition: transform 0.3s ease;
+  border-right: 1.5px solid var(--border);
+  box-shadow: 2px 0 20px rgba(124,92,191,0.07);
+}
+.sidebar-brand {
+  padding: 22px 20px 18px;
+  border-bottom: 1.5px solid var(--border);
+  display:flex;align-items:center;gap:10px;
+}
+.brand-icon {
+  width: 40px; height: 40px;
+  background: linear-gradient(135deg, #9c6fde, #f06292);
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(156,111,222,0.35);
+}
+.brand-name {
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+}
+.brand-sub {
+  font-size: 0.62rem;
+  color: var(--text3);
+  margin-top: 1px;
+}
+.sidebar-nav {
+  flex: 1;
+  padding: 14px 12px;
+  overflow-y: auto;
+}
+.nav-section-label {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text3);
+  padding: 10px 10px 5px;
+  font-weight: 700;
+}
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: var(--sidebar-text);
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: all 0.15s;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+  font-family: 'Hind Siliguri', sans-serif;
+  margin-bottom: 2px;
+}
+.nav-item:hover { background: var(--accent-light); color: var(--accent); }
+.nav-item.active {
+  background: var(--sidebar-active-bg);
+  color: var(--sidebar-active);
+  font-weight: 600;
+}
+.nav-item.active .nav-dot { background: var(--accent); opacity:1; }
+.nav-icon { font-size: 1rem; width: 20px; text-align: center; flex-shrink: 0; }
+.nav-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--accent);
+  margin-left: auto;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.sidebar-footer {
+  padding: 14px 12px;
+  border-top: 1.5px solid var(--border);
+}
+.sidebar-date {
+  font-size: 0.7rem;
+  color: var(--text3);
+  text-align: center;
+  padding: 6px;
+}
+
+/* ===== MAIN LAYOUT ===== */
+.main-wrapper {
+  margin-left: var(--sidebar-w);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== TOPBAR ===== */
+.topbar {
+  height: var(--topbar-h);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  padding: 0 28px;
+  gap: 14px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.topbar-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text);
+  flex-shrink: 0;
+}
+.topbar-title span {
+  font-weight: 400;
+  color: var(--text2);
+  font-size: 0.82rem;
+  margin-left: 8px;
+}
+
+/* SEARCH BAR */
+.topbar-search {
+  flex: 1;
+  max-width: 380px;
+  position: relative;
+  margin-left: 8px;
+}
+.topbar-search input {
+  width: 100%;
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(255,255,255,0.95);
+  border-radius: 24px;
+  padding: 8px 16px 8px 38px;
+  font-family: 'Hind Siliguri', sans-serif;
+  font-size: 0.82rem;
+  color: var(--text);
+  outline: none;
+  box-shadow: 0 2px 10px rgba(124,92,191,0.08);
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+.topbar-search input::placeholder { color: var(--text3); }
+.topbar-search input:focus {
+  border-color: var(--accent);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(124,92,191,0.12);
+}
+.topbar-search-icon {
+  position: absolute;
+  left: 12px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--text3);
+  font-size: 0.88rem;
+  pointer-events: none;
+}
+.search-dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0; right: 0;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 8px 30px rgba(124,92,191,0.18);
+  border: 1.5px solid var(--border);
+  overflow: hidden;
+  display: none;
+  z-index: 300;
+  max-height: 280px;
+  overflow-y: auto;
+}
+.search-dropdown.show { display: block; animation: fadeIn 0.15s ease; }
+.search-result-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px;
+  cursor: pointer;
+  transition: background 0.12s;
+  font-size: 0.83rem;
+}
+.search-result-item:hover { background: var(--accent-light); }
+.search-result-icon {
+  width: 30px; height: 30px; border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.85rem; flex-shrink: 0;
+}
+.search-result-name { font-weight: 600; color: var(--text); }
+.search-result-sub { font-size: 0.68rem; color: var(--text2); }
+.search-result-tag {
+  margin-left: auto; font-size: 0.62rem; font-weight: 700;
+  padding: 2px 7px; border-radius: 10px;
+}
+.search-no-result { padding: 18px; text-align: center; color: var(--text3); font-size: 0.82rem; }
+
+.topbar-right {
+  display: flex; align-items: center; gap: 10px;
+  margin-left: auto; flex-shrink: 0;
+}
+.topbar-badge {
+  background: rgba(255,255,255,0.75);
+  backdrop-filter: blur(8px);
+  color: var(--text2);
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  border: 1px solid rgba(255,255,255,0.9);
+  box-shadow: var(--shadow-sm);
+}
+.hamburger {
+  display: none;
+  background: none; border: none; cursor: pointer;
+  color: var(--text2); font-size: 1.3rem;
+  padding: 4px;
+}
+
+/* ===== CONTENT ===== */
+.content {
+  flex: 1;
+  padding: 0 28px 32px;
+  max-width: 980px;
+  width: 100%;
+}
+.page { display: none; }
+.page.active { display: block; animation: fadeIn 0.22s ease; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+
+/* ===== PAGE HEADER ===== */
+.page-header {
+  margin-bottom: 22px;
+  padding-top: 4px;
+}
+.page-header h1 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 2px;
+}
+.page-header p {
+  font-size: 0.8rem;
+  color: var(--text2);
+}
+
+/* ===== COLORFUL STAT CARDS ===== */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 22px;
+}
+.stat-card {
+  border-radius: var(--radius);
+  padding: 20px 20px 18px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.18s, box-shadow 0.18s;
+  border: none;
+}
+.stat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+
+/* Color variants */
+.stat-card.pink  { background: linear-gradient(135deg, #ff80b5 0%, #ff4d8d 100%); color:#fff; box-shadow: 0 8px 24px rgba(240,98,146,0.35); }
+.stat-card.yellow{ background: linear-gradient(135deg, #ffd54f 0%, #ffab00 100%); color:#fff; box-shadow: 0 8px 24px rgba(249,168,37,0.35); }
+.stat-card.green { background: linear-gradient(135deg, #43e8a6 0%, #00b97a 100%); color:#fff; box-shadow: 0 8px 24px rgba(38,194,129,0.35); }
+.stat-card.blue  { background: linear-gradient(135deg, #74a0f5 0%, #3b6ef5 100%); color:#fff; box-shadow: 0 8px 24px rgba(91,134,229,0.35); }
+.stat-card.purple{ background: linear-gradient(135deg, #c49fec 0%, #8b5cf6 100%); color:#fff; box-shadow: 0 8px 24px rgba(156,111,222,0.35); }
+.stat-card.red   { background: linear-gradient(135deg, #ff8a80 0%, #ef5350 100%); color:#fff; box-shadow: 0 8px 24px rgba(239,83,80,0.35); }
+.stat-card.white { background: #ffffff; color: var(--text); box-shadow: var(--shadow); border: 1.5px solid var(--border); }
+
+.stat-card.full { grid-column: span 3; }
+.stat-card.half { grid-column: span 2; }
+
+.stat-label { font-size: 0.7rem; font-weight: 600; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
+.stat-card.white .stat-label { color: var(--text2); opacity:1; }
+.stat-value { font-size: 1.55rem; font-weight: 700; letter-spacing: -0.02em; }
+.stat-card.white .stat-value { color: var(--text); }
+.stat-value.pink-v { color: #f06292; }
+.stat-value.yellow-v { color: #f9a825; }
+.stat-value.green-v { color: var(--green); }
+.stat-value.blue-v { color: var(--blue); }
+.stat-value.purple-v { color: var(--purple); }
+.stat-value.red-v { color: var(--red); }
+.stat-sub { font-size: 0.68rem; opacity: 0.8; margin-top: 5px; }
+.stat-card.white .stat-sub { color: var(--text3); opacity:1; }
+
+/* decorative circle on cards */
+.stat-card::after {
+  content:'';
+  position:absolute;
+  right:-20px; top:-20px;
+  width:90px; height:90px;
+  border-radius:50%;
+  background: rgba(255,255,255,0.15);
+}
+.stat-card::before {
+  content:'';
+  position:absolute;
+  right:30px; bottom:-30px;
+  width:60px; height:60px;
+  border-radius:50%;
+  background: rgba(255,255,255,0.10);
+}
+.stat-card.white::after, .stat-card.white::before { display:none; }
+
+/* ===== SECTION TITLE ===== */
+.section-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text2);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  margin: 24px 0 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 1.5px;
+  background: linear-gradient(90deg, var(--border), transparent);
+}
+
+/* ===== FORM CARD ===== */
+.form-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+.form-card-header {
+  padding: 14px 20px;
+  border-bottom: 1.5px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #f8f5ff, #fff5f8);
+}
+.form-card-header-icon {
+  width: 32px; height: 32px; border-radius: 9px;
+  background: var(--accent-light);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem;
+}
+.form-card-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text);
+}
+.form-card-body { padding: 18px 20px; }
+.frow { margin-bottom: 12px; }
+.frow:last-child { margin-bottom: 0; }
+.frow label {
+  display: block;
+  font-size: 0.73rem;
+  color: var(--text2);
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+.frow input, .frow select, .frow textarea {
+  width: 100%;
+  background: #f8f5ff;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-family: 'Hind Siliguri', sans-serif;
+  font-size: 0.88rem;
+  padding: 9px 13px;
+  outline: none;
+  transition: border-color 0.18s, box-shadow 0.18s;
+}
+.frow input:focus, .frow select:focus {
+  border-color: var(--accent);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(124,92,191,0.12);
+}
+.fgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+/* ===== BUTTONS ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: linear-gradient(135deg, #9c6fde, #7c5cbf);
+  color: #fff;
+  font-family: 'Hind Siliguri', sans-serif;
+  font-weight: 600;
+  font-size: 0.85rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  padding: 10px 18px;
+  cursor: pointer;
+  width: 100%;
+  transition: transform 0.1s, box-shadow 0.15s;
+  box-shadow: 0 4px 14px rgba(124,92,191,0.3);
+}
+.btn:hover { box-shadow: 0 6px 20px rgba(124,92,191,0.4); transform: translateY(-1px); }
+.btn:active { transform: scale(0.98); }
+.btn.pink { background: linear-gradient(135deg, #ff80b5, #e91e8c); box-shadow: 0 4px 14px rgba(240,98,146,0.3); }
+.btn.pink:hover { box-shadow: 0 6px 20px rgba(240,98,146,0.4); }
+.btn.green { background: linear-gradient(135deg, #43e8a6, #00b97a); box-shadow: 0 4px 14px rgba(38,194,129,0.3); }
+.btn.green:hover { box-shadow: 0 6px 20px rgba(38,194,129,0.4); }
+.btn.red { background: linear-gradient(135deg, #ff8a80, #ef5350); box-shadow: 0 4px 14px rgba(239,83,80,0.3); }
+.btn.red:hover { box-shadow: 0 6px 20px rgba(239,83,80,0.4); }
+.btn.blue { background: linear-gradient(135deg, #74a0f5, #3b6ef5); box-shadow: 0 4px 14px rgba(59,110,245,0.3); }
+.btn.yellow { background: linear-gradient(135deg, #ffd54f, #ffab00); color:#fff; box-shadow: 0 4px 14px rgba(249,168,37,0.3); }
+.btn.purple { background: linear-gradient(135deg, #c49fec, #8b5cf6); box-shadow: 0 4px 14px rgba(139,92,246,0.3); }
+.btn.sm { padding: 6px 13px; font-size: 0.75rem; width: auto; }
+.btn.outline {
+  background: #fff;
+  border: 1.5px solid var(--border);
+  color: var(--text2);
+  box-shadow: var(--shadow-sm);
+}
+.btn.outline:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-light); box-shadow: var(--shadow-sm); transform: none; }
+.btn-group { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+
+/* ===== LIST ITEMS ===== */
+.item-list { display: flex; flex-direction: column; gap: 10px; }
+.item {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  box-shadow: var(--shadow-sm);
+  border: 1.5px solid var(--border);
+  transition: box-shadow 0.15s, border-color 0.15s, transform 0.15s;
+  animation: fadeIn 0.2s ease;
+}
+.item:hover { box-shadow: var(--shadow); border-color: #d4c4f0; transform: translateX(2px); }
+.item-info { flex: 1; min-width: 0; }
+.item-name { font-size: 0.88rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.item-meta { font-size: 0.7rem; color: var(--text2); margin-top: 2px; }
+.item-amount { font-size: 1rem; font-weight: 700; text-align: right; white-space: nowrap; }
+.del-btn {
+  width: 30px; height: 30px; border-radius: 8px;
+  background: none; border: none; cursor: pointer;
+  color: var(--text3);
+  font-size: 0.85rem;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+.del-btn:hover { background: var(--red-light); color: var(--red); }
+
+/* ===== PROFILE CARDS ===== */
+.profile-card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  padding: 16px 18px;
+  cursor: pointer;
+  transition: box-shadow 0.2s, border-color 0.15s, transform 0.15s;
+  animation: fadeIn 0.2s ease;
+}
+.profile-card:hover { box-shadow: var(--shadow); border-color: #c4a8e8; transform: translateY(-2px); }
+.pc-head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.pc-avatar {
+  width: 42px; height: 42px; border-radius: 13px;
+  background: linear-gradient(135deg, #9c6fde, #f06292);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.05rem; color: #fff; font-weight: 700;
+  flex-shrink: 0;
+  box-shadow: 0 3px 10px rgba(156,111,222,0.3);
+}
+.pc-name { font-size: 0.92rem; font-weight: 700; }
+.pc-phone { font-size: 0.7rem; color: var(--text2); margin-top: 2px; }
+.pc-stats { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+.pc-stat {
+  background: var(--bg);
+  border-radius: 10px;
+  padding: 9px 7px;
+  text-align: center;
+  border: 1px solid var(--border);
+}
+.pc-stat-label { font-size: 0.58rem; color: var(--text2); font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 3px; }
+.pc-stat-val { font-size: 0.85rem; font-weight: 700; }
+
+/* ===== DETAIL VIEW ===== */
+.detail-topbar {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 18px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 14px 18px;
+  box-shadow: var(--shadow-sm);
+  border: 1.5px solid var(--border);
+}
+.back-btn {
+  display: flex; align-items: center; gap: 6px;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 7px 13px;
+  cursor: pointer;
+  font-family: 'Hind Siliguri', sans-serif;
+  font-size: 0.78rem;
+  color: var(--text2);
+  transition: all 0.15s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.back-btn:hover { background: var(--accent-light); color: var(--accent); border-color: var(--accent); }
+
+/* ===== BADGE ===== */
+.badge {
+  display: inline-block; font-size: 0.6rem; padding: 2px 7px;
+  border-radius: 20px; font-weight: 700; margin-left: 6px; vertical-align: middle;
+}
+.badge.income { background: var(--green-light); color: var(--green); }
+.badge.expense { background: var(--red-light); color: var(--red); }
+
+/* ===== DAY ROW ===== */
+.day-row {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 13px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: var(--shadow-sm);
+  border: 1.5px solid var(--border);
+  animation: fadeIn 0.2s ease;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.day-row:hover { transform: translateX(2px); box-shadow: var(--shadow); }
+.dr-date { font-size: 0.86rem; font-weight: 600; }
+.dr-sub { font-size: 0.68rem; color: var(--text2); margin-top: 2px; }
+.dr-amount { font-size: 1rem; font-weight: 700; color: var(--green); }
+
+/* ===== EMPTY STATE ===== */
+.empty {
+  text-align: center;
+  color: var(--text3);
+  font-size: 0.85rem;
+  padding: 36px 16px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 2px dashed var(--border);
+}
+.empty-icon { font-size: 2.2rem; margin-bottom: 10px; opacity: 0.5; }
+
+/* ===== DATE RANGE BUTTONS ===== */
+.range-btns {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 10px;
+}
+
+/* ===== MOBILE OVERLAY ===== */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(26,19,64,0.5);
+  z-index: 190;
+  backdrop-filter: blur(2px);
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #d4c4f0; border-radius: 10px; }
+
+/* ===== ANIMATIONS ===== */
+
+/* Page load: body fade in */
+body { animation: bodyReveal 0.5s ease both; }
+@keyframes bodyReveal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Sidebar: slide in from left on load — desktop only */
+@media (min-width: 701px) {
+  .sidebar { animation: sidebarSlideIn 0.45s cubic-bezier(0.22,1,0.36,1) both; }
+}
+@keyframes sidebarSlideIn {
+  from { transform: translateX(-100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* Sidebar brand icon: spin + scale on load */
+.brand-icon { animation: brandPop 0.6s cubic-bezier(0.34,1.56,0.64,1) 0.3s both; }
+@keyframes brandPop {
+  from { transform: scale(0) rotate(-180deg); opacity: 0; }
+  to { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+/* Nav items: staggered slide in */
+.nav-item:nth-child(1) { animation: navSlide 0.4s ease 0.35s both; }
+.nav-item:nth-child(2) { animation: navSlide 0.4s ease 0.40s both; }
+.nav-item:nth-child(3) { animation: navSlide 0.4s ease 0.45s both; }
+.nav-item:nth-child(4) { animation: navSlide 0.4s ease 0.50s both; }
+.nav-item:nth-child(5) { animation: navSlide 0.4s ease 0.55s both; }
+.nav-item:nth-child(6) { animation: navSlide 0.4s ease 0.60s both; }
+.nav-item:nth-child(7) { animation: navSlide 0.4s ease 0.65s both; }
+.nav-item:nth-child(8) { animation: navSlide 0.4s ease 0.70s both; }
+@keyframes navSlide {
+  from { transform: translateX(-18px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* Nav item: active indicator pulse */
+.nav-item.active .nav-dot {
+  animation: dotPulse 2s ease-in-out infinite;
+}
+@keyframes dotPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(124,92,191,0.5); }
+  50% { box-shadow: 0 0 0 5px rgba(124,92,191,0); }
+}
+
+/* Nav item hover: smooth icon bounce */
+.nav-item:hover .nav-icon {
+  display: inline-block;
+  animation: iconWiggle 0.4s ease;
+}
+@keyframes iconWiggle {
+  0% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(-12deg) scale(1.2); }
+  75% { transform: rotate(8deg) scale(1.1); }
+  100% { transform: rotate(0deg) scale(1); }
+}
+
+/* Topbar: slide down */
+.topbar { animation: topbarDrop 0.45s cubic-bezier(0.22,1,0.36,1) 0.2s both; }
+@keyframes topbarDrop {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Page transition */
+.page.active {
+  animation: pageReveal 0.3s cubic-bezier(0.22,1,0.36,1) both;
+}
+@keyframes pageReveal {
+  from { opacity: 0; transform: translateY(16px) scale(0.99); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Page header: slide up */
+.page.active .page-header {
+  animation: slideUp 0.35s cubic-bezier(0.22,1,0.36,1) 0.05s both;
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Stat cards: staggered pop-in */
+.stat-card:nth-child(1) { animation: cardPop 0.45s cubic-bezier(0.34,1.56,0.64,1) 0.1s both; }
+.stat-card:nth-child(2) { animation: cardPop 0.45s cubic-bezier(0.34,1.56,0.64,1) 0.17s both; }
+.stat-card:nth-child(3) { animation: cardPop 0.45s cubic-bezier(0.34,1.56,0.64,1) 0.24s both; }
+.stat-card:nth-child(4) { animation: cardPop 0.45s cubic-bezier(0.34,1.56,0.64,1) 0.31s both; }
+.stat-card:nth-child(5) { animation: cardPop 0.45s cubic-bezier(0.34,1.56,0.64,1) 0.38s both; }
+.stat-card:nth-child(6) { animation: cardPop 0.45s cubic-bezier(0.34,1.56,0.64,1) 0.45s both; }
+@keyframes cardPop {
+  from { opacity: 0; transform: translateY(24px) scale(0.92); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Stat card hover: lift with glow */
+.stat-card:not(.white):hover {
+  transform: translateY(-5px) scale(1.025);
+  box-shadow: 0 16px 40px rgba(124,92,191,0.28) !important;
+  transition: transform 0.25s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.25s ease !important;
+}
+
+/* Form card: fade slide in */
+.form-card { animation: formFade 0.4s ease 0.15s both; }
+@keyframes formFade {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Button: press effect */
+.btn { transition: transform 0.12s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.15s ease !important; }
+.btn:hover { transform: translateY(-2px) scale(1.02) !important; }
+.btn:active { transform: scale(0.95) !important; }
+
+/* Button ripple on click */
+.btn { position: relative; overflow: hidden; }
+.btn .ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.35);
+  transform: scale(0);
+  animation: rippleAnim 0.55s linear;
+  pointer-events: none;
+}
+@keyframes rippleAnim {
+  to { transform: scale(4); opacity: 0; }
+}
+
+/* Item list items: stagger slide-in */
+.item-list .item { animation: itemSlide 0.3s ease both; }
+.item-list .item:nth-child(1) { animation-delay: 0.04s; }
+.item-list .item:nth-child(2) { animation-delay: 0.08s; }
+.item-list .item:nth-child(3) { animation-delay: 0.12s; }
+.item-list .item:nth-child(4) { animation-delay: 0.16s; }
+.item-list .item:nth-child(5) { animation-delay: 0.20s; }
+.item-list .item:nth-child(6) { animation-delay: 0.24s; }
+@keyframes itemSlide {
+  from { opacity: 0; transform: translateX(-14px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Profile cards: stagger pop */
+.item-list .profile-card:nth-child(1) { animation: cardPop 0.4s cubic-bezier(0.34,1.56,0.64,1) 0.05s both; }
+.item-list .profile-card:nth-child(2) { animation: cardPop 0.4s cubic-bezier(0.34,1.56,0.64,1) 0.10s both; }
+.item-list .profile-card:nth-child(3) { animation: cardPop 0.4s cubic-bezier(0.34,1.56,0.64,1) 0.15s both; }
+.item-list .profile-card:nth-child(4) { animation: cardPop 0.4s cubic-bezier(0.34,1.56,0.64,1) 0.20s both; }
+.item-list .profile-card:nth-child(5) { animation: cardPop 0.4s cubic-bezier(0.34,1.56,0.64,1) 0.25s both; }
+.item-list .profile-card:nth-child(6) { animation: cardPop 0.4s cubic-bezier(0.34,1.56,0.64,1) 0.30s both; }
+
+/* Delete button: shake on hover */
+.del-btn:hover { animation: shake 0.35s ease; }
+@keyframes shake {
+  0%, 100% { transform: rotate(0deg); }
+  20% { transform: rotate(-12deg); }
+  40% { transform: rotate(10deg); }
+  60% { transform: rotate(-8deg); }
+  80% { transform: rotate(6deg); }
+}
+
+/* Back button hover */
+.back-btn { transition: all 0.2s cubic-bezier(0.34,1.56,0.64,1) !important; }
+.back-btn:hover { transform: translateX(-3px) !important; }
+
+/* Detail view: slide in */
+#moh-detail-view, #pai-detail-view, #khu-detail-view {
+  animation: pageReveal 0.3s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+/* Empty state: float animation */
+.empty { animation: emptyFloat 0.5s ease both; }
+.empty-icon { animation: floatBounce 3s ease-in-out infinite 0.5s; }
+@keyframes emptyFloat {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes floatBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* Brand icon: subtle shimmer */
+.brand-icon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.25) 50%, transparent 70%);
+  border-radius: inherit;
+  animation: shimmer 3s ease-in-out infinite 1s;
+  background-size: 200% 200%;
+}
+.brand-icon { position: relative; }
+@keyframes shimmer {
+  0% { background-position: -100% -100%; opacity: 0; }
+  50% { background-position: 100% 100%; opacity: 1; }
+  100% { background-position: 200% 200%; opacity: 0; }
+}
+
+/* Input focus: smooth glow */
+.frow input:focus, .frow select:focus {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease !important;
+  animation: inputGlow 0.3s ease both;
+}
+@keyframes inputGlow {
+  from { box-shadow: 0 0 0 0 rgba(124,92,191,0); }
+  to { box-shadow: 0 0 0 3px rgba(124,92,191,0.12); }
+}
+
+/* Search dropdown: spring open */
+.search-dropdown.show {
+  animation: dropdownSpring 0.25s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+@keyframes dropdownSpring {
+  from { opacity: 0; transform: translateY(-8px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Day row hover */
+.day-row { transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s ease !important; }
+.day-row:hover { transform: translateX(5px) !important; }
+
+/* Section title: fade in */
+.section-title { animation: fadeInRight 0.4s ease 0.1s both; }
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Topbar badge: pulse glow */
+.topbar-badge { animation: badgePulse 4s ease-in-out infinite 2s; }
+@keyframes badgePulse {
+  0%, 100% { box-shadow: 0 2px 8px rgba(124,92,191,0.06); }
+  50% { box-shadow: 0 2px 16px rgba(124,92,191,0.18); }
+}
+
+/* PC avatar: spin on hover */
+.pc-avatar {
+  transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+}
+.profile-card:hover .pc-avatar {
+  transform: rotate(-8deg) scale(1.12);
+}
+
+/* Stat value number count up: handled in JS */
+.stat-value[data-count] { transition: none; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 700px) {
+  :root { --sidebar-w: 0px; }
+  .sidebar { transform: translateX(-240px); width: 240px; }
+  .sidebar.open { transform: translateX(0); }
+  .sidebar-overlay.open { display: block; }
+  .main-wrapper { margin-left: 0; }
+  .hamburger { display: flex; }
+  .topbar-badge { display: none; }
+  .topbar-search { display: none !important; }
+  .mobile-search-icon-btn { display: flex !important; }
+  .content { padding: 0 16px 28px; }
+  .stat-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .stat-card.full { grid-column: span 2; }
+  .stat-card.half { grid-column: span 2; }
+  .fgrid { grid-template-columns: 1fr; }
+  .btn-group { grid-template-columns: 1fr; }
+}
+
+/* mobile search icon button */
+.mobile-search-icon-btn {
+  display: none;
+  width: 36px; height: 36px;
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(255,255,255,0.95);
+  border-radius: 50%;
+  align-items: center; justify-content: center;
+  cursor: pointer;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(124,92,191,0.08);
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+.mobile-search-icon-btn:hover { background: #fff; }
+
+/* mobile search overlay */
+.mobile-search-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: rgba(26,19,64,0.45);
+  backdrop-filter: blur(4px);
+  z-index: 500;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  transform: translateY(-100%);
+  opacity: 0;
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), opacity 0.25s ease;
+  pointer-events: none;
+}
+.mobile-search-overlay.open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: all;
+}
+.mobile-search-inner {
+  background: #fff;
+  border-radius: 16px;
+  padding: 14px 16px;
+  box-shadow: 0 12px 40px rgba(124,92,191,0.2);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1.5px solid var(--border);
+}
+.mobile-search-inner input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-family: 'Hind Siliguri', sans-serif;
+  font-size: 0.95rem;
+  color: var(--text);
+  background: transparent;
+}
+.mobile-search-inner input::placeholder { color: var(--text3); }
+.mobile-search-close {
+  width: 28px; height: 28px;
+  background: var(--bg);
+  border: none; border-radius: 50%;
+  cursor: pointer;
+  font-size: 0.75rem;
+  color: var(--text2);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+.mobile-search-close:hover { background: var(--red-light); color: var(--red); }
+.mobile-search-results {
+  background: #fff;
+  border-radius: 14px;
+  margin-top: 8px;
+  box-shadow: 0 8px 30px rgba(124,92,191,0.15);
+  border: 1.5px solid var(--border);
+  overflow: hidden;
+  max-height: 320px;
+  overflow-y: auto;
+  display: none;
+}
+.mobile-search-results.show { display: block; animation: fadeIn 0.15s ease; }
+@media (max-width: 400px) {
+  .stat-grid { grid-template-columns: 1fr; }
+  .stat-card.full, .stat-card.half { grid-column: span 1; }
+}
+</style>
+</head>
+<body>
+
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="closeSidebar()"></div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <div class="brand-icon">🧵</div>
+    <div>
+      <div class="brand-name">বিসমিল্লাহ<br>বস্ত্র বিতান</div>
+      <div class="brand-sub" id="brandYear"></div>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-section-label">প্রধান মেনু</div>
+    <button class="nav-item active" onclick="gotoPage('dashboard',this)">
+      <span class="nav-icon">📊</span> সারসংক্ষেপ
+      <span class="nav-dot"></span>
+    </button>
+    <button class="nav-item" onclick="gotoPage('sales',this)">
+      <span class="nav-icon">💰</span> বিক্রয়
+      <span class="nav-dot"></span>
+    </button>
+
+    <div class="nav-section-label" style="margin-top:8px">হিসাব</div>
+    <button class="nav-item" onclick="gotoPage('mohajon',this)">
+      <span class="nav-icon">🏦</span> মহাজন
+      <span class="nav-dot"></span>
+    </button>
+    <button class="nav-item" onclick="gotoPage('paikar',this)">
+      <span class="nav-icon">🛒</span> পাইকার
+      <span class="nav-dot"></span>
+    </button>
+    <button class="nav-item" onclick="gotoPage('khuchra',this)">
+      <span class="nav-icon">🧾</span> খুচরা বাকি
+      <span class="nav-dot"></span>
+    </button>
+
+    <div class="nav-section-label" style="margin-top:8px">রিপোর্ট ও ডেটা</div>
+    <button class="nav-item" onclick="gotoPage('report',this)">
+      <span class="nav-icon">📋</span> রিপোর্ট
+      <span class="nav-dot"></span>
+    </button>
+    <button class="nav-item" onclick="gotoPage('backup',this)">
+      <span class="nav-icon">💾</span> ব্যাকআপ
+      <span class="nav-dot"></span>
+    </button>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="sidebar-date" id="sidebarDate"></div>
+  </div>
+</aside>
+
+<!-- MAIN WRAPPER -->
+<div class="main-wrapper">
+
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <button class="hamburger" onclick="toggleSidebar()">☰</button>
+    <div class="topbar-title" id="topbarTitle">সারসংক্ষেপ <span>ড্যাশবোর্ড</span></div>
+
+    <!-- SEARCH BAR -->
+    <div class="topbar-search" id="topbarSearch">
+      <span class="topbar-search-icon">🔍</span>
+      <input type="text" id="globalSearch" placeholder="মহাজন, পাইকার, খুচরা খুঁজুন..." oninput="globalSearchFn(this.value)" onfocus="globalSearchFn(this.value)" autocomplete="off">
+      <div class="search-dropdown" id="searchDropdown"></div>
+    </div>
+
+    <div class="topbar-right">
+      <div class="topbar-badge" id="topbarDate"></div>
+      <!-- mobile search icon -->
+      <button class="mobile-search-icon-btn" onclick="openMobileSearch()" title="সার্চ">🔍</button>
+    </div>
+  </header>
+
+  <!-- MOBILE SEARCH OVERLAY -->
+  <div class="mobile-search-overlay" id="mobileSearchOverlay" onclick="handleOverlayClick(event)">
+    <div class="mobile-search-inner">
+      <span style="font-size:1.1rem">🔍</span>
+      <input type="text" id="mobileSearchInput" placeholder="মহাজন, পাইকার, খুচরা খুঁজুন..." oninput="mobileSearchFn(this.value)" autocomplete="off">
+      <button class="mobile-search-close" onclick="closeMobileSearch()">✕</button>
+    </div>
+    <div class="mobile-search-results" id="mobileSearchResults"></div>
+  </div>
+
+  <!-- CONTENT -->
+  <div class="content">
+
+    <!-- DASHBOARD PAGE -->
+    <div class="page active" id="page-dashboard">
+      <div class="page-header">
+        <h1>💰 সার্বিক হিসাব</h1>
+        <p>সব সময়ের মোট হিসাব একনজরে</p>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-card pink">
+          <div class="stat-label">মোট বিক্রয়</div>
+          <div class="stat-value" id="db-total-sale">৳০</div>
+          <div class="stat-sub" id="db-total-sale-sub">০টি এন্ট্রি</div>
+        </div>
+        <div class="stat-card yellow">
+          <div class="stat-label">মহাজনকে দেওয়া</div>
+          <div class="stat-value" id="db-total-moh">৳০</div>
+          <div class="stat-sub">সব পেমেন্ট মিলিয়ে</div>
+        </div>
+        <div class="stat-card green" id="db-net-card">
+          <div class="stat-label">হাতে আছে</div>
+          <div class="stat-value" id="db-total-net" style="font-size:1.55rem">৳০</div>
+          <div class="stat-sub" id="db-total-net-sub"></div>
+        </div>
+      </div>
+
+      <div class="section-title">📅 আজকের হিসাব</div>
+      <div class="stat-grid">
+        <div class="stat-card pink">
+          <div class="stat-label">আজকের বিক্রয়</div>
+          <div class="stat-value" id="db-sale">৳০</div>
+          <div class="stat-sub" id="db-sale-sub">০টি এন্ট্রি</div>
+        </div>
+        <div class="stat-card yellow">
+          <div class="stat-label">আজ মহাজনকে দেওয়া</div>
+          <div class="stat-value" id="db-paid">৳০</div>
+          <div class="stat-sub">আজকের পেমেন্ট</div>
+        </div>
+        <div class="stat-card green" id="db-today-net-card">
+          <div class="stat-label">আজকের নেট</div>
+          <div class="stat-value" id="db-net">৳০</div>
+          <div class="stat-sub">বিক্রয় − মহাজন পেমেন্ট</div>
+        </div>
+        <div class="stat-card blue">
+          <div class="stat-label">মোট পাইকারি বাকি</div>
+          <div class="stat-value" id="db-pdue">৳০</div>
+          <div class="stat-sub" id="db-pdue-sub">০ জন</div>
+        </div>
+        <div class="stat-card purple half">
+          <div class="stat-label">মোট খুচরা বাকি</div>
+          <div class="stat-value" id="db-kdue">৳০</div>
+          <div class="stat-sub" id="db-kdue-sub">০ জন</div>
+        </div>
+      </div>
+
+      <div class="section-title">সাম্প্রতিক বিক্রয়</div>
+      <div class="item-list" id="db-recent"></div>
+
+      <div class="section-title" style="margin-top:24px">🗓️ তারিখ ধরে হিসাব</div>
+      <div class="form-card">
+        <div class="form-card-header">
+          <div class="form-card-header-icon">🗓️</div>
+          <div class="form-card-title">তারিখ পরিসর</div>
+        </div>
+        <div class="form-card-body">
+          <div class="fgrid" style="margin-bottom:10px">
+            <div class="frow"><label>শুরু</label><input type="date" id="db-from" onchange="renderDateRange()"></div>
+            <div class="frow"><label>শেষ</label><input type="date" id="db-to" onchange="renderDateRange()"></div>
+          </div>
+          <div class="range-btns">
+            <button class="btn outline" onclick="dbSetRange('today')">আজ</button>
+            <button class="btn outline" onclick="dbSetRange('week')">এই সপ্তাহ</button>
+            <button class="btn outline" onclick="dbSetRange('month')">এই মাস</button>
+          </div>
+        </div>
+      </div>
+      <div id="db-range-result"></div>
+    </div>
+
+    <!-- SALES PAGE -->
+    <div class="page" id="page-sales">
+      <div class="page-header">
+        <h1>💰 বিক্রয়</h1>
+        <p>দৈনিক বিক্রয় এন্ট্রি ও ইতিহাস</p>
+      </div>
+      <div class="form-card">
+        <div class="form-card-header">
+          <div class="form-card-header-icon" style="background:#fce4ec">➕</div>
+          <div class="form-card-title">নতুন বিক্রয় এন্ট্রি</div>
+        </div>
+        <div class="form-card-body">
+          <div class="fgrid">
+            <div class="frow"><label>তারিখ</label><input type="date" id="s-date"></div>
+            <div class="frow"><label>মোট বিক্রয় (৳)</label><input type="number" id="s-amount" placeholder="০"></div>
+          </div>
+          <div class="frow"><label>নোট (ঐচ্ছিক)</label><input type="text" id="s-note" placeholder="যেমন: শুক্রবারের বিক্রয়..."></div>
+          <button class="btn pink" onclick="addSale()">✅ বিক্রয় সেভ করুন</button>
+        </div>
+      </div>
+      <div class="section-title">বিক্রয়ের ইতিহাস</div>
+      <div class="item-list" id="sale-list"></div>
+    </div>
+
+    <!-- MOHAJON PAGE -->
+    <div class="page" id="page-mohajon">
+      <div class="page-header">
+        <h1>🏦 মহাজন</h1>
+        <p>মহাজনদের হিসাব ও লেনদেন</p>
+      </div>
+      <div id="moh-list-view">
+        <div class="form-card">
+          <div class="form-card-header">
+            <div class="form-card-header-icon">➕</div>
+            <div class="form-card-title">নতুন মহাজন যোগ করুন</div>
+          </div>
+          <div class="form-card-body">
+            <div class="fgrid">
+              <div class="frow"><label>নাম</label><input type="text" id="moh-name" placeholder="মহাজনের নাম"></div>
+              <div class="frow"><label>ফোন</label><input type="text" id="moh-phone" placeholder="নম্বর"></div>
+            </div>
+            <div class="frow"><label>ঠিকানা</label><input type="text" id="moh-address" placeholder="ঠিকানা (ঐচ্ছিক)"></div>
+            <div class="frow"><label>সাবেক বাকি ৳</label><input type="number" id="moh-opening" placeholder="০"></div>
+            <button class="btn" onclick="addMohajon()">➕ মহাজন যোগ করুন</button>
+          </div>
+        </div>
+        <div class="section-title">মহাজন তালিকা</div>
+        <div class="frow" style="margin-bottom:10px"><input type="text" id="moh-search" placeholder="🔍 নাম বা ফোন দিয়ে খুঁজুন..." oninput="renderMohList()" style="background:#fff"></div>
+        <div class="item-list" id="moh-list"></div>
+      </div>
+      <div id="moh-detail-view" style="display:none"></div>
+    </div>
+
+    <!-- PAIKAR PAGE -->
+    <div class="page" id="page-paikar">
+      <div class="page-header">
+        <h1>🛒 পাইকার</h1>
+        <p>পাইকারদের হিসাব ও লেনদেন</p>
+      </div>
+      <div id="pai-list-view">
+        <div class="form-card">
+          <div class="form-card-header">
+            <div class="form-card-header-icon" style="background:#e8eeff">➕</div>
+            <div class="form-card-title">নতুন পাইকার যোগ করুন</div>
+          </div>
+          <div class="form-card-body">
+            <div class="fgrid">
+              <div class="frow"><label>নাম</label><input type="text" id="pai-name" placeholder="পাইকারের নাম"></div>
+              <div class="frow"><label>ফোন</label><input type="text" id="pai-phone" placeholder="নম্বর"></div>
+            </div>
+            <div class="frow"><label>ঠিকানা</label><input type="text" id="pai-address" placeholder="ঠিকানা (ঐচ্ছিক)"></div>
+            <div class="frow"><label>সাবেক বাকি ৳</label><input type="number" id="pai-opening" placeholder="০"></div>
+            <button class="btn blue" onclick="addPaikar()">➕ পাইকার যোগ করুন</button>
+          </div>
+        </div>
+        <div class="section-title">পাইকার তালিকা</div>
+        <div class="frow" style="margin-bottom:10px"><input type="text" id="pai-search" placeholder="🔍 নাম বা ফোন দিয়ে খুঁজুন..." oninput="renderPaiList()" style="background:#fff"></div>
+        <div class="item-list" id="pai-list"></div>
+      </div>
+      <div id="pai-detail-view" style="display:none"></div>
+    </div>
+
+    <!-- KHUCHRA PAGE -->
+    <div class="page" id="page-khuchra">
+      <div class="page-header">
+        <h1>🧾 খুচরা বাকি</h1>
+        <p>খুচরা কাস্টমারদের বাকির হিসাব</p>
+      </div>
+      <div id="khu-list-view">
+        <div class="form-card">
+          <div class="form-card-header">
+            <div class="form-card-header-icon" style="background:#f3eeff">➕</div>
+            <div class="form-card-title">নতুন খুচরা কাস্টমার যোগ করুন</div>
+          </div>
+          <div class="form-card-body">
+            <div class="fgrid">
+              <div class="frow"><label>নাম</label><input type="text" id="khu-name" placeholder="কাস্টমারের নাম"></div>
+              <div class="frow"><label>ফোন</label><input type="text" id="khu-phone" placeholder="নম্বর"></div>
+            </div>
+            <div class="frow"><label>ঠিকানা</label><input type="text" id="khu-address" placeholder="ঠিকানা (ঐচ্ছিক)"></div>
+            <div class="frow"><label>সাবেক বাকি ৳</label><input type="number" id="khu-opening" placeholder="০"></div>
+            <button class="btn purple" onclick="addKhuchra()">➕ কাস্টমার যোগ করুন</button>
+          </div>
+        </div>
+        <div class="section-title">খুচরা বাকির তালিকা</div>
+        <div class="frow" style="margin-bottom:10px"><input type="text" id="khu-search" placeholder="🔍 নাম বা ফোন দিয়ে খুঁজুন..." oninput="renderKhuList()" style="background:#fff"></div>
+        <div class="item-list" id="khu-list"></div>
+      </div>
+      <div id="khu-detail-view" style="display:none"></div>
+    </div>
+
+    <!-- REPORT PAGE -->
+    <div class="page" id="page-report">
+      <div class="page-header">
+        <h1>📋 রিপোর্ট</h1>
+        <p>তারিখ অনুযায়ী বিস্তারিত রিপোর্ট</p>
+      </div>
+      <div class="form-card">
+        <div class="form-card-header">
+          <div class="form-card-header-icon">🔍</div>
+          <div class="form-card-title">রিপোর্ট ফিল্টার</div>
+        </div>
+        <div class="form-card-body">
+          <div class="fgrid">
+            <div class="frow"><label>শুরুর তারিখ</label><input type="date" id="rpt-from" onchange="renderReport()"></div>
+            <div class="frow"><label>শেষের তারিখ</label><input type="date" id="rpt-to" onchange="renderReport()"></div>
+          </div>
+          <div class="range-btns">
+            <button class="btn outline" onclick="setReportRange('month')">📅 এই মাস</button>
+            <button class="btn outline" onclick="setReportRange('week')">📅 এই সপ্তাহ</button>
+          </div>
+        </div>
+      </div>
+      <div id="report-content"><div class="empty"><div class="empty-icon">📊</div>উপরে তারিখ সিলেক্ট করুন</div></div>
+    </div>
+
+    <!-- BACKUP PAGE -->
+    <div class="page" id="page-backup">
+      <div class="page-header">
+        <h1>💾 ব্যাকআপ</h1>
+        <p>ডেটা সংরক্ষণ ও পুনরুদ্ধার</p>
+      </div>
+
+      <div class="form-card" style="border-top: 3px solid #4285f4">
+        <div class="form-card-header">
+          <div class="form-card-header-icon" style="background:#e8f0fe">☁️</div>
+          <div class="form-card-title" style="color:#4285f4">গুগল ড্রাইভ অটো-সিঙ্ক</div>
+        </div>
+        <div class="form-card-body">
+          <div id="gdrive-status-box" style="background:var(--bg);border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:0.82rem;line-height:1.6;color:var(--text2)">
+            গুগল একাউন্টে লগইন করলে প্রতিবার ডেটা সেভ হওয়ার সাথে সাথে ড্রাইভে backup হবে।
+          </div>
+          <div id="gdrive-signin-area">
+            <button class="btn" style="background:#4285f4;box-shadow:0 4px 14px rgba(66,133,244,0.3)" onclick="gdriveSignIn()">
+              <svg width="16" height="16" viewBox="0 0 48 48"><path fill="#fff" d="M44.5 20H24v8.5h11.8C34.7 33.9 30.1 37 24 37c-7.2 0-13-5.8-13-13s5.8-13 13-13c3.1 0 5.9 1.1 8.1 2.9l6.4-6.4C34.6 4.1 29.6 2 24 2 11.8 2 2 11.8 2 24s9.8 22 22 22c11 0 21-8 21-22 0-1.3-.2-2.7-.5-4z"/></svg>
+              গুগল একাউন্ট দিয়ে লগইন করুন
+            </button>
+          </div>
+          <div id="gdrive-loggedin-area" style="display:none">
+            <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+              <img id="gdrive-avatar" src="" style="width:36px;height:36px;border-radius:50%;border:2px solid #4285f4" onerror="this.style.display='none'">
+              <div><div id="gdrive-username" style="font-weight:700;font-size:0.9rem"></div><div id="gdrive-email" style="font-size:0.72rem;color:var(--text2)"></div></div>
+              <button onclick="gdriveSignOut()" style="margin-left:auto;background:none;border:1.5px solid var(--border);color:var(--text2);border-radius:8px;padding:5px 11px;font-size:0.73rem;cursor:pointer">লগআউট</button>
+            </div>
+            <div id="gdrive-sync-status" style="font-size:0.78rem;color:var(--text2);margin-bottom:10px;min-height:20px"></div>
+            <div class="fgrid">
+              <button class="btn" style="background:#4285f4;box-shadow:0 4px 14px rgba(66,133,244,0.3)" onclick="gdriveSaveNow()">☁️ এখনই সেভ করুন</button>
+              <button class="btn outline" onclick="gdriveRestoreLatest()">🔄 ড্রাইভ থেকে আনুন</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <div class="form-card-header">
+          <div class="form-card-header-icon" style="background:var(--green-light)">💾</div>
+          <div class="form-card-title">ম্যানুয়াল ব্যাকআপ</div>
+        </div>
+        <div class="form-card-body">
+          <p style="font-size:0.82rem;color:var(--text2);margin-bottom:14px;line-height:1.6">নিচের বাটনে চাপলে একটা ফাইল ডাউনলোড হবে — সেটা গুগল ড্রাইভে বা যেকোনো জায়গায় রাখুন।</p>
+          <button class="btn green" onclick="downloadBackup()">⬇️ ব্যাকআপ ডাউনলোড করুন</button>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <div class="form-card-header">
+          <div class="form-card-header-icon" style="background:var(--accent-light)">📂</div>
+          <div class="form-card-title">ব্যাকআপ থেকে রিস্টোর করুন</div>
+        </div>
+        <div class="form-card-body">
+          <p style="font-size:0.82rem;color:var(--text2);margin-bottom:14px;line-height:1.6">আগে ডাউনলোড করা ব্যাকআপ ফাইল সিলেক্ট করুন। <strong style="color:var(--red)">সতর্কতা:</strong> বর্তমান সব ডেটা মুছে যাবে।</p>
+          <label style="display:block;background:var(--bg);border:2px dashed var(--border);border-radius:12px;padding:22px;text-align:center;cursor:pointer;font-size:0.85rem;color:var(--text2)" for="restore-file">📁 ফাইল সিলেক্ট করতে এখানে চাপুন</label>
+          <input type="file" id="restore-file" accept=".json" style="display:none" onchange="restoreBackup(this)">
+        </div>
+      </div>
+
+      <div class="form-card" style="border-top:3px solid var(--red)">
+        <div class="form-card-header">
+          <div class="form-card-header-icon" style="background:var(--red-light)">⚠️</div>
+          <div class="form-card-title" style="color:var(--red)">সব ডেটা মুছুন</div>
+        </div>
+        <div class="form-card-body">
+          <p style="font-size:0.82rem;color:var(--text2);margin-bottom:14px;line-height:1.6">এই অপশনে চাপলে সমস্ত ডেটা চিরতরে মুছে যাবে। আগে ব্যাকআপ নিন।</p>
+          <button class="btn red" onclick="clearAllData()">🗑️ সব মুছে ফেলুন</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main-wrapper -->
+
+<script>
+// ===== SIDEBAR =====
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+  document.getElementById('sidebarOverlay').classList.toggle('open');
+}
+function closeSidebar() {
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('sidebarOverlay').classList.remove('open');
+}
+
+// ===== DATA =====
+let D = JSON.parse(localStorage.getItem('kd_v2') || 'null') || { sales:[], mohajons:[], paikars:[], khuchras:[] };
+if (!D.khuchras) D.khuchras = [];
+
+// ===== GOOGLE DRIVE =====
+const GDRIVE_CLIENT_ID = localStorage.getItem('gd_client_id') || '280656915819-18c2pnmp4m35emcdtlr97olofkl18ksr.apps.googleusercontent.com';
+const GDRIVE_FILENAME = 'bismillah-bostra-bitan-backup.json';
+let gAccessToken = null, gUserInfo = null, gAutoSyncEnabled = false;
+
+function save() {
+  localStorage.setItem('kd_v2', JSON.stringify(D));
+  if (gAutoSyncEnabled && gAccessToken) gdriveAutoSync();
+}
+
+function gdriveSignIn() {
+  if (!GDRIVE_CLIENT_ID) {
+    const cid = prompt('আপনার Google Cloud Console-এর OAuth Client ID দিন:');
+    if (!cid || !cid.trim()) return;
+    localStorage.setItem('gd_client_id', cid.trim());
+    location.reload(); return;
+  }
+  const client = google.accounts.oauth2.initTokenClient({
+    client_id: GDRIVE_CLIENT_ID,
+    scope: ['https://www.googleapis.com/auth/drive.appdata','https://www.googleapis.com/auth/userinfo.profile','https://www.googleapis.com/auth/userinfo.email'].join(' '),
+    callback: async (resp) => {
+      if (resp.error) { alert('লগইন ব্যর্থ: ' + resp.error); return; }
+      gAccessToken = resp.access_token;
+      localStorage.setItem('gd_token', gAccessToken);
+      await gdriveLoadUserInfo(); gAutoSyncEnabled = true; gdriveUpdateUI();
+      gdriveSyncStatus('✅ লগইন সফল!'); await gdriveRestoreLatestSilent();
+    }
+  });
+  client.requestAccessToken();
+}
+function gdriveSignOut() {
+  if (gAccessToken) google.accounts.oauth2.revoke(gAccessToken);
+  gAccessToken = null; gUserInfo = null; gAutoSyncEnabled = false;
+  localStorage.removeItem('gd_token'); gdriveUpdateUI();
+}
+async function gdriveLoadUserInfo() {
+  try { const r = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', { headers: { Authorization: 'Bearer ' + gAccessToken } }); gUserInfo = await r.json(); } catch(e) {}
+}
+function gdriveUpdateUI() {
+  const sa = document.getElementById('gdrive-signin-area');
+  const la = document.getElementById('gdrive-loggedin-area');
+  if (!sa) return;
+  if (gAccessToken && gUserInfo) {
+    sa.style.display = 'none'; la.style.display = 'block';
+    document.getElementById('gdrive-username').textContent = gUserInfo.name || '';
+    document.getElementById('gdrive-email').textContent = gUserInfo.email || '';
+    if (gUserInfo.picture) document.getElementById('gdrive-avatar').src = gUserInfo.picture;
+  } else { sa.style.display = 'block'; la.style.display = 'none'; }
+}
+function gdriveSyncStatus(msg, color) { const el = document.getElementById('gdrive-sync-status'); if (el) { el.textContent = msg; if (color) el.style.color = color; } }
+async function gdriveSaveNow() {
+  if (!gAccessToken) { alert('আগে লগইন করুন'); return; }
+  gdriveSyncStatus('⏳ সেভ হচ্ছে...');
+  const ok = await gdriveUpload();
+  gdriveSyncStatus(ok ? '✅ সফলভাবে সেভ হয়েছে' : '❌ সেভ ব্যর্থ');
+}
+async function gdriveAutoSync() { try { await gdriveUpload(); gdriveSyncStatus('✅ শেষ সেভ: ' + new Date().toLocaleTimeString('bn-BD')); } catch(e) {} }
+async function gdriveUpload() {
+  try {
+    const fileId = await gdriveFindFile();
+    const metadata = { name: GDRIVE_FILENAME, parents: fileId ? undefined : ['appDataFolder'] };
+    const form = new FormData();
+    form.append('metadata', new Blob([JSON.stringify(metadata)], { type: 'application/json' }));
+    form.append('file', new Blob([JSON.stringify(D, null, 2)], { type: 'application/json' }));
+    const r = await fetch((fileId ? `https://www.googleapis.com/upload/drive/v3/files/${fileId}?uploadType=multipart` : 'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart'), { method: fileId ? 'PATCH' : 'POST', headers: { Authorization: 'Bearer ' + gAccessToken }, body: form });
+    return r.ok;
+  } catch(e) { return false; }
+}
+async function gdriveFindFile() {
+  try {
+    const r = await fetch(`https://www.googleapis.com/drive/v3/files?spaces=appDataFolder&q=name='${GDRIVE_FILENAME}'&fields=files(id)`, { headers: { Authorization: 'Bearer ' + gAccessToken } });
+    const data = await r.json();
+    return (data.files && data.files.length) ? data.files[0].id : null;
+  } catch(e) { return null; }
+}
+async function gdriveRestoreLatest() {
+  if (!gAccessToken) { alert('আগে লগইন করুন'); return; }
+  if (!confirm('ড্রাইভ থেকে সর্বশেষ ব্যাকআপ আনবেন?')) return;
+  const ok = await gdriveDownload();
+  gdriveSyncStatus(ok ? '✅ সফলভাবে রিস্টোর হয়েছে!' : '❌ ড্রাইভে কোনো ব্যাকআপ নেই');
+}
+async function gdriveRestoreLatestSilent() { const ok = await gdriveDownload(); gdriveSyncStatus(ok ? '✅ ড্রাইভ থেকে ডেটা আনা হয়েছে' : 'ℹ️ নতুন শুরু হবে'); }
+async function gdriveDownload() {
+  try {
+    const fileId = await gdriveFindFile(); if (!fileId) return false;
+    const r = await fetch(`https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`, { headers: { Authorization: 'Bearer ' + gAccessToken } });
+    if (!r.ok) return false;
+    const parsed = await r.json();
+    if (!parsed.sales || !parsed.mohajons || !parsed.paikars) return false;
+    if (!parsed.khuchras) parsed.khuchras = [];
+    D = parsed; save(); render(); return true;
+  } catch(e) { return false; }
+}
+
+// ===== HELPERS =====
+function today() { return new Date().toISOString().split('T')[0]; }
+function bn(n) { return String(Math.round(n)).replace(/\d/g, d => '০১২৩৪৫৬৭৮৯'[d]); }
+function tk(n) { return '৳' + bn(n); }
+function fdate(iso) { if (!iso) return ''; const d = new Date(iso + 'T00:00:00'); return d.toLocaleDateString('bn-BD', { day:'numeric', month:'short', year:'numeric' }); }
+function uid() { return Date.now() * 1000 + Math.floor(Math.random() * 1000); }
+function initials(name) { return name ? name[0].toUpperCase() : '?'; }
+
+(function(){
+  const d = new Date();
+  const dateStr = d.toLocaleDateString('bn-BD', { weekday:'long', day:'numeric', month:'long' });
+  const yearStr = d.toLocaleDateString('bn-BD', { year:'numeric' });
+  document.getElementById('topbarDate').textContent = dateStr;
+  document.getElementById('brandYear').textContent = yearStr;
+  document.getElementById('sidebarDate').textContent = dateStr;
+})();
+
+document.getElementById('s-date').value = today();
+
+// ===== NAV =====
+const PAGE_TITLES = {
+  dashboard: 'সারসংক্ষেপ', sales: 'বিক্রয়', mohajon: 'মহাজন',
+  paikar: 'পাইকার', khuchra: 'খুচরা বাকি', report: 'রিপোর্ট', backup: 'ব্যাকআপ',
+};
+function gotoPage(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  btn.classList.add('active');
+  document.getElementById('topbarTitle').innerHTML = PAGE_TITLES[id] + ' <span>' + (id === 'dashboard' ? 'ড্যাশবোর্ড' : 'পেজ') + '</span>';
+  closeSidebar();
+  render();
+  if (id === 'report') {
+    const fi = document.getElementById('rpt-from');
+    if (!fi.value) setReportRange('month'); else renderReport();
+  }
+}
+
+// ===== SALES =====
+function addSale() {
+  const date = document.getElementById('s-date').value;
+  const amount = parseFloat(document.getElementById('s-amount').value);
+  const note = document.getElementById('s-note').value.trim();
+  if (!date || !amount || amount <= 0) return alert('তারিখ ও পরিমাণ দিন');
+  D.sales.unshift({ id: uid(), date, amount, note });
+  save(); render();
+  document.getElementById('s-date').value = today();
+  document.getElementById('s-amount').value = '';
+  document.getElementById('s-note').value = '';
+}
+function delSale(id) {
+  if (!confirm('এই এন্ট্রি মুছবেন?')) return;
+  D.sales = D.sales.filter(s => s.id !== id);
+  save(); render();
+}
+
+// ===== MOHAJON =====
+function addMohajon() {
+  const name = document.getElementById('moh-name').value.trim();
+  const phone = document.getElementById('moh-phone').value.trim();
+  const address = document.getElementById('moh-address').value.trim();
+  const opening = parseFloat(document.getElementById('moh-opening').value) || 0;
+  if (!name) return alert('নাম দিন');
+  const txns = [];
+  if (opening > 0) txns.push({ id: uid(), type: 'mal', amount: opening, note: 'সাবেক বাকি', date: today() });
+  D.mohajons.push({ id: uid(), name, phone, address, txns });
+  save(); render();
+  ['moh-name','moh-phone','moh-address','moh-opening'].forEach(id => document.getElementById(id).value = '');
+}
+function delMohajon(id) { if (!confirm('এই মহাজন মুছবেন?')) return; D.mohajons = D.mohajons.filter(m => m.id !== id); save(); render(); }
+function mohStats(m) { let malNeoa=0,tkDilam=0; m.txns.forEach(t => { if(t.type==='mal') malNeoa+=t.amount; if(t.type==='pay') tkDilam+=t.amount; }); return {malNeoa,tkDilam,baki:malNeoa-tkDilam}; }
+function addMohTxnCombined(id) {
+  const m = D.mohajons.find(x => x.id === id); if (!m) return;
+  const date = document.getElementById('mtxn-date-'+id).value || today();
+  const mal = parseFloat(document.getElementById('mtxn-mal-'+id).value) || 0;
+  const pay = parseFloat(document.getElementById('mtxn-pay-'+id).value) || 0;
+  const note = document.getElementById('mtxn-note-'+id).value.trim();
+  if (!mal && !pay) { alert('মাল বা টাকার পরিমাণ দিন'); return; }
+  if (mal > 0) m.txns.unshift({ id: uid(), type: 'mal', amount: mal, note, date });
+  if (pay > 0) m.txns.unshift({ id: uid(), type: 'pay', amount: pay, note, date });
+  save(); renderMohDetail(id); renderDashboard();
+}
+function delMohTxn(mohId, txnId) { const m = D.mohajons.find(x => x.id === mohId); if (!m) return; m.txns = m.txns.filter(t => t.id !== txnId); save(); renderMohDetail(mohId); renderDashboard(); }
+
+// ===== PAIKAR =====
+function addPaikar() {
+  const name = document.getElementById('pai-name').value.trim();
+  const phone = document.getElementById('pai-phone').value.trim();
+  const address = document.getElementById('pai-address').value.trim();
+  const opening = parseFloat(document.getElementById('pai-opening').value) || 0;
+  if (!name) return alert('নাম দিন');
+  const txns = [];
+  if (opening > 0) txns.push({ id: uid(), type: 'mal', amount: opening, note: 'সাবেক বাকি', date: today() });
+  D.paikars.push({ id: uid(), name, phone, address, txns });
+  save(); render();
+  ['pai-name','pai-phone','pai-address','pai-opening'].forEach(id => document.getElementById(id).value = '');
+}
+function delPaikar(id) { if (!confirm('এই পাইকার মুছবেন?')) return; D.paikars = D.paikars.filter(p => p.id !== id); save(); render(); }
+function paiStats(p) { let malDilam=0,tkNilam=0; p.txns.forEach(t => { if(t.type==='mal') malDilam+=t.amount; if(t.type==='pay') tkNilam+=t.amount; }); return {malDilam,tkNilam,baki:malDilam-tkNilam}; }
+function addPaiTxnCombined(id) {
+  const p = D.paikars.find(x => x.id === id); if (!p) return;
+  const date = document.getElementById('ptxn-date-'+id).value || today();
+  const mal = parseFloat(document.getElementById('ptxn-mal-'+id).value) || 0;
+  const pay = parseFloat(document.getElementById('ptxn-pay-'+id).value) || 0;
+  const note = document.getElementById('ptxn-note-'+id).value.trim();
+  if (!mal && !pay) { alert('মাল বা টাকার পরিমাণ দিন'); return; }
+  if (mal > 0) p.txns.unshift({ id: uid(), type: 'mal', amount: mal, note, date });
+  if (pay > 0) p.txns.unshift({ id: uid(), type: 'pay', amount: pay, note, date });
+  save(); renderPaiDetail(id); renderDashboard();
+}
+function delPaiTxn(paiId, txnId) { const p = D.paikars.find(x => x.id === paiId); if (!p) return; p.txns = p.txns.filter(t => t.id !== txnId); save(); renderPaiDetail(paiId); renderDashboard(); }
+
+// ===== KHUCHRA =====
+function khuStats(k) { let malDilam=0,tkNilam=0; k.txns.forEach(t => { if(t.type==='mal') malDilam+=t.amount; if(t.type==='pay') tkNilam+=t.amount; }); return {malDilam,tkNilam,baki:malDilam-tkNilam}; }
+function addKhuchra() {
+  const name = document.getElementById('khu-name').value.trim();
+  const phone = document.getElementById('khu-phone').value.trim();
+  const address = document.getElementById('khu-address').value.trim();
+  const opening = parseFloat(document.getElementById('khu-opening').value) || 0;
+  if (!name) return alert('নাম দিন');
+  const txns = [];
+  if (opening > 0) txns.push({ id: uid(), type: 'mal', amount: opening, note: 'সাবেক বাকি', date: today() });
+  D.khuchras.push({ id: uid(), name, phone, address, txns });
+  save(); render();
+  ['khu-name','khu-phone','khu-address','khu-opening'].forEach(id => document.getElementById(id).value = '');
+}
+function delKhuchra(id) { if (!confirm('এই কাস্টমার মুছবেন?')) return; D.khuchras = D.khuchras.filter(k => k.id !== id); save(); render(); }
+function addKhuTxnCombined(id) {
+  const k = D.khuchras.find(x => x.id === id); if (!k) return;
+  const date = document.getElementById('ktxn-date-'+id).value || today();
+  const mal = parseFloat(document.getElementById('ktxn-mal-'+id).value) || 0;
+  const pay = parseFloat(document.getElementById('ktxn-pay-'+id).value) || 0;
+  const note = document.getElementById('ktxn-note-'+id).value.trim();
+  if (!mal && !pay) { alert('মাল বা টাকার পরিমাণ দিন'); return; }
+  if (mal > 0) k.txns.unshift({ id: uid(), type: 'mal', amount: mal, note, date });
+  if (pay > 0) k.txns.unshift({ id: uid(), type: 'pay', amount: pay, note, date });
+  save(); renderKhuDetail(id); renderDashboard();
+}
+function delKhuTxn(khuId, txnId) { const k = D.khuchras.find(x => x.id === khuId); if (!k) return; k.txns = k.txns.filter(t => t.id !== txnId); save(); renderKhuDetail(khuId); renderDashboard(); }
+
+// ===== RENDER =====
+function render() { renderDashboard(); renderSales(); renderMohList(); renderPaiList(); renderKhuList(); }
+
+function renderDashboard() {
+  const t = today();
+  const allSaleTotal = D.sales.reduce((a,s) => a+s.amount, 0);
+  let allMohPay = 0;
+  D.mohajons.forEach(m => m.txns.filter(tx => tx.type==='pay').forEach(tx => allMohPay+=tx.amount));
+  const allNet = allSaleTotal - allMohPay;
+  document.getElementById('db-total-sale').textContent = tk(allSaleTotal);
+  document.getElementById('db-total-sale-sub').textContent = bn(D.sales.length) + 'টি এন্ট্রি';
+  document.getElementById('db-total-moh').textContent = tk(allMohPay);
+  const totalNetEl = document.getElementById('db-total-net');
+  totalNetEl.textContent = tk(Math.abs(allNet));
+  const netCard = document.getElementById('db-net-card');
+  netCard.className = 'stat-card ' + (allNet >= 0 ? 'green' : 'red');
+  document.getElementById('db-total-net-sub').textContent = allNet >= 0 ? '✅ লাভে আছেন' : '⚠️ মহাজনকে বেশি দিয়েছেন';
+
+  const todaySales = D.sales.filter(s => s.date === t);
+  const totalSale = todaySales.reduce((a,s) => a+s.amount, 0);
+  let todayMohPay = 0;
+  D.mohajons.forEach(m => m.txns.filter(tx => tx.date===t && tx.type==='pay').forEach(tx => todayMohPay+=tx.amount));
+  const netCash = totalSale - todayMohPay;
+  let totalPDue=0, pDueCount=0;
+  D.paikars.forEach(p => { const s=paiStats(p); if(s.baki>0){totalPDue+=s.baki;pDueCount++;} });
+  let totalKDue=0, kDueCount=0;
+  D.khuchras.forEach(k => { const s=khuStats(k); if(s.baki>0){totalKDue+=s.baki;kDueCount++;} });
+
+  document.getElementById('db-sale').textContent = tk(totalSale);
+  document.getElementById('db-sale-sub').textContent = bn(todaySales.length) + 'টি এন্ট্রি';
+  document.getElementById('db-paid').textContent = tk(todayMohPay);
+  const netEl = document.getElementById('db-net');
+  netEl.textContent = tk(Math.abs(netCash));
+  const todayNetCard = document.getElementById('db-today-net-card');
+  if (todayNetCard) todayNetCard.className = 'stat-card ' + (netCash >= 0 ? 'green' : 'red');
+  document.getElementById('db-pdue').textContent = tk(totalPDue);
+  document.getElementById('db-pdue-sub').textContent = bn(pDueCount) + ' জনের বাকি আছে';
+  document.getElementById('db-kdue').textContent = tk(totalKDue);
+  document.getElementById('db-kdue-sub').textContent = bn(kDueCount) + ' জনের বাকি আছে';
+
+  const recent = D.sales.slice(0, 5);
+  const el = document.getElementById('db-recent');
+  el.innerHTML = recent.length ? recent.map(s => `
+    <div class="day-row">
+      <div><div class="dr-date">${fdate(s.date)}</div><div class="dr-sub">${s.note || 'দৈনিক বিক্রয়'}</div></div>
+      <div class="dr-amount">${tk(s.amount)}</div>
+    </div>`).join('') : '<div class="empty"><div class="empty-icon">📊</div>কোনো বিক্রয় নেই</div>';
+
+  const dbFrom = document.getElementById('db-from');
+  if (dbFrom && dbFrom.value) renderDateRange();
+}
+
+function renderSales() {
+  const el = document.getElementById('sale-list');
+  if (!D.sales.length) { el.innerHTML = '<div class="empty"><div class="empty-icon">💰</div>কোনো বিক্রয় এন্ট্রি নেই</div>'; return; }
+  el.innerHTML = D.sales.map(s => `
+    <div class="item">
+      <div class="item-info">
+        <div class="item-name">${fdate(s.date)}</div>
+        <div class="item-meta">${s.note || 'দৈনিক বিক্রয়'}</div>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px">
+        <div class="item-amount" style="color:var(--green)">${tk(s.amount)}</div>
+        <button class="del-btn" onclick="delSale(${s.id})">✕</button>
+      </div>
+    </div>`).join('');
+}
+
+function renderMohList() {
+  const el = document.getElementById('moh-list');
+  const q = (document.getElementById('moh-search')?.value || '').toLowerCase();
+  const list = q ? D.mohajons.filter(m => m.name.toLowerCase().includes(q) || (m.phone||'').includes(q)) : D.mohajons;
+  if (!list.length) { el.innerHTML = '<div class="empty"><div class="empty-icon">🏦</div>' + (q ? 'কোনো ফলাফল নেই' : 'কোনো মহাজন নেই') + '</div>'; return; }
+  el.innerHTML = list.map(m => { const st = mohStats(m); return `
+    <div class="profile-card" onclick="openMohDetail(${m.id})">
+      <div class="pc-head">
+        <div class="pc-avatar">${initials(m.name)}</div>
+        <div><div class="pc-name">${m.name}</div><div class="pc-phone">${m.phone||'ফোন নেই'}${m.address?' · '+m.address:''}</div></div>
+        <button class="del-btn" style="margin-left:auto" onclick="event.stopPropagation();delMohajon(${m.id})">✕</button>
+      </div>
+      <div class="pc-stats">
+        <div class="pc-stat"><div class="pc-stat-label">মাল নেওয়া</div><div class="pc-stat-val" style="color:var(--red)">${tk(st.malNeoa)}</div></div>
+        <div class="pc-stat"><div class="pc-stat-label">টাকা দিলাম</div><div class="pc-stat-val" style="color:var(--green)">${tk(st.tkDilam)}</div></div>
+        <div class="pc-stat"><div class="pc-stat-label">বাকি</div><div class="pc-stat-val" style="color:${st.baki>0?'var(--red)':'var(--green)'}">${tk(Math.abs(st.baki))}</div></div>
+      </div>
+    </div>`; }).join('');
+}
+
+function openMohDetail(id) { document.getElementById('moh-list-view').style.display='none'; document.getElementById('moh-detail-view').style.display='block'; renderMohDetail(id); }
+function closeMohDetail() { document.getElementById('moh-list-view').style.display='block'; document.getElementById('moh-detail-view').style.display='none'; }
+function renderMohDetail(id) {
+  const m = D.mohajons.find(x => x.id === id); if (!m) return;
+  const st = mohStats(m);
+  document.getElementById('moh-detail-view').innerHTML = `
+    <div class="detail-topbar">
+      <button class="back-btn" onclick="closeMohDetail()">← ফিরে যান</button>
+      <div class="pc-avatar" style="width:36px;height:36px;font-size:0.95rem">${initials(m.name)}</div>
+      <div style="flex:1"><div style="font-weight:700;font-size:1rem">${m.name}</div><div style="font-size:0.72rem;color:var(--text2)">${m.phone||''}${m.address?' · '+m.address:''}</div></div>
+      <button class="btn sm green" onclick="printMohReport(${id})">🖨️ রিপোর্ট</button>
+    </div>
+    <div class="stat-grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="stat-card red"><div class="stat-label">মাল নেওয়া</div><div class="stat-value" style="font-size:1.1rem">${tk(st.malNeoa)}</div></div>
+      <div class="stat-card green"><div class="stat-label">টাকা দিলাম</div><div class="stat-value" style="font-size:1.1rem">${tk(st.tkDilam)}</div></div>
+      <div class="stat-card ${st.baki>0?'red':'green'}"><div class="stat-label">বাকি</div><div class="stat-value" style="font-size:1.1rem">${tk(Math.abs(st.baki))}</div></div>
+    </div>
+    <div class="form-card">
+      <div class="form-card-header"><div class="form-card-header-icon">➕</div><div class="form-card-title">নতুন লেনদেন</div></div>
+      <div class="form-card-body">
+        <div class="frow"><label>তারিখ</label><input type="date" id="mtxn-date-${id}" value="${today()}"></div>
+        <div class="fgrid">
+          <div class="frow"><label>📦 মাল নিলাম ৳</label><input type="number" id="mtxn-mal-${id}" placeholder="০"></div>
+          <div class="frow"><label>💸 টাকা দিলাম ৳</label><input type="number" id="mtxn-pay-${id}" placeholder="০"></div>
+        </div>
+        <div class="frow"><label>নোট</label><input type="text" id="mtxn-note-${id}" placeholder="বিবরণ (ঐচ্ছিক)"></div>
+        <button class="btn" onclick="addMohTxnCombined(${id})">✅ সেভ করুন</button>
+      </div>
+    </div>
+    <div class="section-title">লেনদেনের ইতিহাস</div>
+    <div class="item-list">
+      ${m.txns.length ? m.txns.map(t => `
+        <div class="item">
+          <div class="item-info">
+            <div class="item-name">${t.type==='mal'?'📦 মাল নেওয়া':'💸 টাকা দেওয়া'}<span class="badge ${t.type==='mal'?'expense':'income'}">${t.type==='mal'?'দায়':'পেমেন্ট'}</span></div>
+            <div class="item-meta">${fdate(t.date)}${t.note?' · '+t.note:''}</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <div class="item-amount" style="color:${t.type==='mal'?'var(--red)':'var(--green)'}">${tk(t.amount)}</div>
+            <button class="del-btn" onclick="delMohTxn(${id},${t.id})">✕</button>
+          </div>
+        </div>`).join('') : '<div class="empty">কোনো লেনদেন নেই</div>'}
+    </div>`;
+}
+
+function renderPaiList() {
+  const el = document.getElementById('pai-list');
+  const q = (document.getElementById('pai-search')?.value || '').toLowerCase();
+  const list = q ? D.paikars.filter(p => p.name.toLowerCase().includes(q) || (p.phone||'').includes(q)) : D.paikars;
+  if (!list.length) { el.innerHTML = '<div class="empty"><div class="empty-icon">🛒</div>' + (q ? 'কোনো ফলাফল নেই' : 'কোনো পাইকার নেই') + '</div>'; return; }
+  el.innerHTML = list.map(p => { const st = paiStats(p); return `
+    <div class="profile-card" onclick="openPaiDetail(${p.id})">
+      <div class="pc-head">
+        <div class="pc-avatar" style="background:linear-gradient(135deg,#74a0f5,#3b6ef5)">${initials(p.name)}</div>
+        <div><div class="pc-name">${p.name}</div><div class="pc-phone">${p.phone||'ফোন নেই'}${p.address?' · '+p.address:''}</div></div>
+        <button class="del-btn" style="margin-left:auto" onclick="event.stopPropagation();delPaikar(${p.id})">✕</button>
+      </div>
+      <div class="pc-stats">
+        <div class="pc-stat"><div class="pc-stat-label">মাল দিলাম</div><div class="pc-stat-val" style="color:var(--blue)">${tk(st.malDilam)}</div></div>
+        <div class="pc-stat"><div class="pc-stat-label">টাকা নিলাম</div><div class="pc-stat-val" style="color:var(--green)">${tk(st.tkNilam)}</div></div>
+        <div class="pc-stat"><div class="pc-stat-label">বাকি</div><div class="pc-stat-val" style="color:${st.baki>0?'var(--red)':'var(--green)'}">${tk(Math.abs(st.baki))}</div></div>
+      </div>
+    </div>`; }).join('');
+}
+
+function openPaiDetail(id) { document.getElementById('pai-list-view').style.display='none'; document.getElementById('pai-detail-view').style.display='block'; renderPaiDetail(id); }
+function closePaiDetail() { document.getElementById('pai-list-view').style.display='block'; document.getElementById('pai-detail-view').style.display='none'; }
+function renderPaiDetail(id) {
+  const p = D.paikars.find(x => x.id === id); if (!p) return;
+  const st = paiStats(p);
+  document.getElementById('pai-detail-view').innerHTML = `
+    <div class="detail-topbar">
+      <button class="back-btn" onclick="closePaiDetail()">← ফিরে যান</button>
+      <div class="pc-avatar" style="width:36px;height:36px;font-size:0.95rem;background:linear-gradient(135deg,#74a0f5,#3b6ef5)">${initials(p.name)}</div>
+      <div style="flex:1"><div style="font-weight:700;font-size:1rem">${p.name}</div><div style="font-size:0.72rem;color:var(--text2)">${p.phone||''}${p.address?' · '+p.address:''}</div></div>
+      <button class="btn sm green" onclick="printPaiReport(${id})">🖨️ রিপোর্ট</button>
+    </div>
+    <div class="stat-grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="stat-card blue"><div class="stat-label">মাল দিলাম</div><div class="stat-value" style="font-size:1.1rem">${tk(st.malDilam)}</div></div>
+      <div class="stat-card green"><div class="stat-label">টাকা নিলাম</div><div class="stat-value" style="font-size:1.1rem">${tk(st.tkNilam)}</div></div>
+      <div class="stat-card ${st.baki>0?'red':'green'}"><div class="stat-label">বাকি</div><div class="stat-value" style="font-size:1.1rem">${tk(Math.abs(st.baki))}</div></div>
+    </div>
+    <div class="form-card">
+      <div class="form-card-header"><div class="form-card-header-icon" style="background:#e8eeff">➕</div><div class="form-card-title">নতুন লেনদেন</div></div>
+      <div class="form-card-body">
+        <div class="frow"><label>তারিখ</label><input type="date" id="ptxn-date-${id}" value="${today()}"></div>
+        <div class="fgrid">
+          <div class="frow"><label>📦 মাল দিলাম ৳</label><input type="number" id="ptxn-mal-${id}" placeholder="০"></div>
+          <div class="frow"><label>💵 টাকা নিলাম ৳</label><input type="number" id="ptxn-pay-${id}" placeholder="০"></div>
+        </div>
+        <div class="frow"><label>নোট</label><input type="text" id="ptxn-note-${id}" placeholder="বিবরণ (ঐচ্ছিক)"></div>
+        <button class="btn blue" onclick="addPaiTxnCombined(${id})">✅ সেভ করুন</button>
+      </div>
+    </div>
+    <div class="section-title">লেনদেনের ইতিহাস</div>
+    <div class="item-list">
+      ${p.txns.length ? p.txns.map(t => `
+        <div class="item">
+          <div class="item-info">
+            <div class="item-name">${t.type==='mal'?'📦 মাল দেওয়া':'💵 টাকা নেওয়া'}<span class="badge ${t.type==='pay'?'income':'expense'}">${t.type==='mal'?'বিক্রয়':'পেমেন্ট'}</span></div>
+            <div class="item-meta">${fdate(t.date)}${t.note?' · '+t.note:''}</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <div class="item-amount" style="color:${t.type==='pay'?'var(--green)':'var(--blue)'}">${tk(t.amount)}</div>
+            <button class="del-btn" onclick="delPaiTxn(${id},${t.id})">✕</button>
+          </div>
+        </div>`).join('') : '<div class="empty">কোনো লেনদেন নেই</div>'}
+    </div>`;
+}
+
+function renderKhuList() {
+  const el = document.getElementById('khu-list'); if (!el) return;
+  const q = (document.getElementById('khu-search')?.value || '').toLowerCase();
+  const list = q ? D.khuchras.filter(k => k.name.toLowerCase().includes(q) || (k.phone||'').includes(q)) : D.khuchras;
+  if (!list.length) { el.innerHTML = '<div class="empty"><div class="empty-icon">🧾</div>' + (q ? 'কোনো ফলাফল নেই' : 'কোনো খুচরা কাস্টমার নেই') + '</div>'; return; }
+  el.innerHTML = list.map(k => { const st = khuStats(k); return `
+    <div class="profile-card" onclick="openKhuDetail(${k.id})">
+      <div class="pc-head">
+        <div class="pc-avatar" style="background:linear-gradient(135deg,#c49fec,#8b5cf6)">${initials(k.name)}</div>
+        <div><div class="pc-name">${k.name}</div><div class="pc-phone">${k.phone||'ফোন নেই'}${k.address?' · '+k.address:''}</div></div>
+        <button class="del-btn" style="margin-left:auto" onclick="event.stopPropagation();delKhuchra(${k.id})">✕</button>
+      </div>
+      <div class="pc-stats">
+        <div class="pc-stat"><div class="pc-stat-label">মাল দিলাম</div><div class="pc-stat-val" style="color:var(--purple)">${tk(st.malDilam)}</div></div>
+        <div class="pc-stat"><div class="pc-stat-label">টাকা নিলাম</div><div class="pc-stat-val" style="color:var(--green)">${tk(st.tkNilam)}</div></div>
+        <div class="pc-stat"><div class="pc-stat-label">বাকি</div><div class="pc-stat-val" style="color:${st.baki>0?'var(--red)':'var(--green)'}">${tk(Math.abs(st.baki))}</div></div>
+      </div>
+    </div>`; }).join('');
+}
+
+function openKhuDetail(id) { document.getElementById('khu-list-view').style.display='none'; document.getElementById('khu-detail-view').style.display='block'; renderKhuDetail(id); }
+function closeKhuDetail() { document.getElementById('khu-list-view').style.display='block'; document.getElementById('khu-detail-view').style.display='none'; }
+function renderKhuDetail(id) {
+  const k = D.khuchras.find(x => x.id === id); if (!k) return;
+  const st = khuStats(k);
+  document.getElementById('khu-detail-view').innerHTML = `
+    <div class="detail-topbar">
+      <button class="back-btn" onclick="closeKhuDetail()">← ফিরে যান</button>
+      <div class="pc-avatar" style="width:36px;height:36px;font-size:0.95rem;background:linear-gradient(135deg,#c49fec,#8b5cf6)">${initials(k.name)}</div>
+      <div style="flex:1"><div style="font-weight:700;font-size:1rem">${k.name}</div><div style="font-size:0.72rem;color:var(--text2)">${k.phone||''}${k.address?' · '+k.address:''}</div></div>
+      <button class="btn sm purple" onclick="printKhuReport(${id})">🖨️ রিপোর্ট</button>
+    </div>
+    <div class="stat-grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="stat-card purple"><div class="stat-label">মাল দিলাম</div><div class="stat-value" style="font-size:1.1rem">${tk(st.malDilam)}</div></div>
+      <div class="stat-card green"><div class="stat-label">টাকা নিলাম</div><div class="stat-value" style="font-size:1.1rem">${tk(st.tkNilam)}</div></div>
+      <div class="stat-card ${st.baki>0?'red':'green'}"><div class="stat-label">বাকি</div><div class="stat-value" style="font-size:1.1rem">${tk(Math.abs(st.baki))}</div></div>
+    </div>
+    <div class="form-card">
+      <div class="form-card-header"><div class="form-card-header-icon" style="background:#f3eeff">➕</div><div class="form-card-title">নতুন লেনদেন</div></div>
+      <div class="form-card-body">
+        <div class="frow"><label>তারিখ</label><input type="date" id="ktxn-date-${id}" value="${today()}"></div>
+        <div class="fgrid">
+          <div class="frow"><label>🧾 মাল দিলাম ৳</label><input type="number" id="ktxn-mal-${id}" placeholder="০"></div>
+          <div class="frow"><label>💵 টাকা নিলাম ৳</label><input type="number" id="ktxn-pay-${id}" placeholder="০"></div>
+        </div>
+        <div class="frow"><label>নোট</label><input type="text" id="ktxn-note-${id}" placeholder="বিবরণ (ঐচ্ছিক)"></div>
+        <button class="btn purple" onclick="addKhuTxnCombined(${id})">✅ সেভ করুন</button>
+      </div>
+    </div>
+    <div class="section-title">লেনদেনের ইতিহাস</div>
+    <div class="item-list">
+      ${k.txns.length ? k.txns.map(t => `
+        <div class="item">
+          <div class="item-info">
+            <div class="item-name">${t.type==='mal'?'🧾 মাল দেওয়া':'💵 টাকা নেওয়া'}<span class="badge ${t.type==='pay'?'income':'expense'}">${t.type==='mal'?'বাকি':'আদায়'}</span></div>
+            <div class="item-meta">${fdate(t.date)}${t.note?' · '+t.note:''}</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <div class="item-amount" style="color:${t.type==='pay'?'var(--green)':'var(--purple)'}">${tk(t.amount)}</div>
+            <button class="del-btn" onclick="delKhuTxn(${id},${t.id})">✕</button>
+          </div>
+        </div>`).join('') : '<div class="empty">কোনো লেনদেন নেই</div>'}
+    </div>`;
+}
+
+// ===== REPORT =====
+function setReportRange(type) {
+  const now = new Date();
+  let from, to;
+  if (type === 'month') { from = new Date(now.getFullYear(), now.getMonth(), 1); to = new Date(now.getFullYear(), now.getMonth()+1, 0); }
+  else { const day=now.getDay(); from=new Date(now); from.setDate(now.getDate()-day); to=new Date(now); to.setDate(now.getDate()+(6-day)); }
+  document.getElementById('rpt-from').value = from.toISOString().split('T')[0];
+  document.getElementById('rpt-to').value = to.toISOString().split('T')[0];
+  renderReport();
+}
+
+function renderReport() {
+  const fromVal = document.getElementById('rpt-from').value;
+  const toVal = document.getElementById('rpt-to').value;
+  const el = document.getElementById('report-content');
+  if (!fromVal || !toVal) { el.innerHTML = '<div class="empty"><div class="empty-icon">📊</div>তারিখ সিলেক্ট করুন</div>'; return; }
+  const sales = D.sales.filter(s => s.date >= fromVal && s.date <= toVal);
+  const totalSale = sales.reduce((a,s) => a+s.amount, 0);
+  let totalMohPay=0, totalMohMal=0;
+  D.mohajons.forEach(m => m.txns.forEach(t => { if(t.date>=fromVal&&t.date<=toVal){if(t.type==='pay')totalMohPay+=t.amount;if(t.type==='mal')totalMohMal+=t.amount;} }));
+  let totalPaiMal=0, totalPaiPay=0;
+  D.paikars.forEach(p => p.txns.forEach(t => { if(t.date>=fromVal&&t.date<=toVal){if(t.type==='mal')totalPaiMal+=t.amount;if(t.type==='pay')totalPaiPay+=t.amount;} }));
+  let mohTotalDue=0, paiTotalDue=0, khuTotalDue=0;
+  D.mohajons.forEach(m => { const s=mohStats(m); mohTotalDue+=Math.max(0,s.baki); });
+  D.paikars.forEach(p => { const s=paiStats(p); paiTotalDue+=Math.max(0,s.baki); });
+  D.khuchras.forEach(k => { const s=khuStats(k); khuTotalDue+=Math.max(0,s.baki); });
+  const net = totalSale - totalMohPay;
+  el.innerHTML = `
+    <div class="section-title">📊 রিপোর্ট সারসংক্ষেপ</div>
+    <div class="stat-grid">
+      <div class="stat-card pink"><div class="stat-label">মোট বিক্রয়</div><div class="stat-value">${tk(totalSale)}</div><div class="stat-sub">${bn(sales.length)}টি এন্ট্রি</div></div>
+      <div class="stat-card ${net>=0?'green':'red'}"><div class="stat-label">নেট ক্যাশ</div><div class="stat-value">${tk(Math.abs(net))}</div><div class="stat-sub">বিক্রয় − মহাজন পেমেন্ট</div></div>
+      <div class="stat-card yellow"><div class="stat-label">মহাজনকে দেওয়া</div><div class="stat-value">${tk(totalMohPay)}</div><div class="stat-sub">মাল নেওয়া: ${tk(totalMohMal)}</div></div>
+      <div class="stat-card blue"><div class="stat-label">পাইকারি বিক্রয়</div><div class="stat-value">${tk(totalPaiMal)}</div><div class="stat-sub">আদায়: ${tk(totalPaiPay)}</div></div>
+    </div>
+    <div class="section-title">💳 সর্বমোট বকেয়া</div>
+    <div class="stat-grid" style="grid-template-columns:repeat(3,1fr)">
+      <div class="stat-card red"><div class="stat-label">মহাজনকে বকেয়া</div><div class="stat-value">${tk(mohTotalDue)}</div><div class="stat-sub">${bn(D.mohajons.length)} জন</div></div>
+      <div class="stat-card blue"><div class="stat-label">পাইকারের বকেয়া</div><div class="stat-value">${tk(paiTotalDue)}</div><div class="stat-sub">${bn(D.paikars.filter(p=>paiStats(p).baki>0).length)} জন</div></div>
+      <div class="stat-card purple"><div class="stat-label">খুচরা বকেয়া</div><div class="stat-value">${tk(khuTotalDue)}</div><div class="stat-sub">${bn(D.khuchras.filter(k=>khuStats(k).baki>0).length)} জন</div></div>
+    </div>
+    <div class="section-title">📅 বিক্রয় বিস্তারিত</div>
+    <div class="item-list">
+      ${sales.length ? sales.map(s=>`<div class="day-row"><div><div class="dr-date">${fdate(s.date)}</div><div class="dr-sub">${s.note||'দৈনিক বিক্রয়'}</div></div><div class="dr-amount">${tk(s.amount)}</div></div>`).join('') : '<div class="empty">এই সময়ে কোনো বিক্রয় নেই</div>'}
+    </div>`;
+}
+
+// ===== DASHBOARD DATE RANGE =====
+function dbSetRange(type) {
+  const now = new Date(); let from, to;
+  if (type==='today') { from=to=today(); }
+  else if (type==='week') { const day=now.getDay(); const f=new Date(now); f.setDate(now.getDate()-day); const t2=new Date(now); t2.setDate(now.getDate()+(6-day)); from=f.toISOString().split('T')[0]; to=t2.toISOString().split('T')[0]; }
+  else if (type==='month') { from=new Date(now.getFullYear(),now.getMonth(),1).toISOString().split('T')[0]; to=new Date(now.getFullYear(),now.getMonth()+1,0).toISOString().split('T')[0]; }
+  document.getElementById('db-from').value = from;
+  document.getElementById('db-to').value = to;
+  renderDateRange();
+}
+
+function renderDateRange() {
+  const from = document.getElementById('db-from').value;
+  const to = document.getElementById('db-to').value;
+  const el = document.getElementById('db-range-result');
+  if (!from || !to) { el.innerHTML=''; return; }
+  const sales = D.sales.filter(s => s.date>=from && s.date<=to);
+  const totalSale = sales.reduce((a,s) => a+s.amount, 0);
+  let mohPay=0, mohMal=0;
+  D.mohajons.forEach(m => m.txns.forEach(t => { if(t.date>=from&&t.date<=to){if(t.type==='pay')mohPay+=t.amount;if(t.type==='mal')mohMal+=t.amount;} }));
+  let paiMal=0, paiPay=0;
+  D.paikars.forEach(p => p.txns.forEach(t => { if(t.date>=from&&t.date<=to){if(t.type==='mal')paiMal+=t.amount;if(t.type==='pay')paiPay+=t.amount;} }));
+  let khuMal=0, khuPay=0;
+  D.khuchras.forEach(k => k.txns.forEach(t => { if(t.date>=from&&t.date<=to){if(t.type==='mal')khuMal+=t.amount;if(t.type==='pay')khuPay+=t.amount;} }));
+  const net = totalSale - mohPay;
+  el.innerHTML = `
+    <div class="stat-grid">
+      <div class="stat-card pink"><div class="stat-label">মোট বিক্রয়</div><div class="stat-value">${tk(totalSale)}</div><div class="stat-sub">${bn(sales.length)}টি</div></div>
+      <div class="stat-card yellow"><div class="stat-label">মহাজনকে দেওয়া</div><div class="stat-value">${tk(mohPay)}</div><div class="stat-sub">মাল: ${tk(mohMal)}</div></div>
+      <div class="stat-card ${net>=0?'green':'red'} full"><div class="stat-label">🏦 হাতে আছে</div><div class="stat-value" style="font-size:1.5rem">${tk(Math.abs(net))}</div><div class="stat-sub">${net>=0?'✅ ইতিবাচক':'⚠️ ঘাটতি'}</div></div>
+      <div class="stat-card blue"><div class="stat-label">পাইকারি</div><div class="stat-value">${tk(paiMal)}</div><div class="stat-sub">আদায়: ${tk(paiPay)}</div></div>
+      <div class="stat-card purple"><div class="stat-label">খুচরা বাকি</div><div class="stat-value">${tk(khuMal)}</div><div class="stat-sub">আদায়: ${tk(khuPay)}</div></div>
+    </div>
+    <div class="section-title">বিক্রয়ের বিস্তারিত</div>
+    <div class="item-list">
+      ${sales.length ? sales.map(s=>`<div class="day-row"><div><div class="dr-date">${fdate(s.date)}</div><div class="dr-sub">${s.note||'দৈনিক বিক্রয়'}</div></div><div class="dr-amount">${tk(s.amount)}</div></div>`).join('') : '<div class="empty">এই সময়ে কোনো বিক্রয় নেই</div>'}
+    </div>`;
+}
+
+// ===== BACKUP =====
+function downloadBackup() {
+  var blob = new Blob([JSON.stringify(D, null, 2)], { type: 'application/json' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a'); a.href = url;
+  a.download = 'bismillah-backup-' + new Date().toISOString().split('T')[0] + '.json';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
+}
+function restoreBackup(input) {
+  var file = input.files[0]; if (!file) return;
+  if (!confirm('সতর্কতা! বর্তমান সব ডেটা মুছে যাবে। নিশ্চিত?')) { input.value=''; return; }
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      var parsed = JSON.parse(e.target.result);
+      if (!parsed.sales || !parsed.mohajons || !parsed.paikars) throw new Error();
+      if (!parsed.khuchras) parsed.khuchras = [];
+      D = parsed; save(); render(); alert('✅ ব্যাকআপ সফলভাবে রিস্টোর হয়েছে!');
+    } catch(err) { alert('❌ ভুল ফাইল!'); }
+    input.value = '';
+  };
+  reader.readAsText(file);
+}
+function clearAllData() {
+  if (!confirm('সতর্কতা! সমস্ত ডেটা চিরতরে মুছে যাবে। নিশ্চিত?')) return;
+  if (!confirm('শেষবার নিশ্চিত — সব মুছে ফেলবেন?')) return;
+  D = { sales:[], mohajons:[], paikars:[], khuchras:[] }; save(); render();
+  alert('✅ সব ডেটা মুছে গেছে।');
+}
+
+// ===== PRINT REPORTS =====
+function printReport(title, headerBg, person, summary, rows) {
+  var old = document.getElementById('print-modal'); if (old) old.remove();
+  var modal = document.createElement('div');
+  modal.id = 'print-modal';
+  modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(26,19,64,0.55);z-index:9999;overflow-y:auto;padding:16px;backdrop-filter:blur(4px)';
+  modal.innerHTML = `<div style="background:#fff;border-radius:18px;max-width:620px;margin:0 auto;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.2)">
+    <div style="background:${headerBg};padding:16px 20px;display:flex;justify-content:space-between;align-items:center">
+      <div style="color:#fff;font-weight:700;font-size:1rem">🧵 বিসমিল্লাহ বস্ত্র বিতান</div>
+      <button onclick="document.getElementById('print-modal').remove()" style="background:rgba(255,255,255,0.2);border:none;color:#fff;border-radius:8px;padding:6px 12px;cursor:pointer">✕ বন্ধ</button>
+    </div>
+    <div style="padding:18px">
+      <div style="background:#f8f5ff;border-radius:12px;padding:12px 16px;margin-bottom:14px;border-left:4px solid #9c6fde">
+        <div style="font-weight:700;font-size:1rem;font-family:Hind Siliguri,sans-serif">${person.name}</div>
+        <div style="font-size:0.78rem;color:#64748b;margin-top:3px">${person.phone?'📞 '+person.phone:''}${person.address?' · 📍'+person.address:''}</div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px">${summary}</div>
+      <div style="font-size:0.72rem;color:#64748b;font-weight:700;text-transform:uppercase;margin-bottom:8px">লেনদেনের বিস্তারিত</div>
+      <div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:0.82rem;font-family:Hind Siliguri,sans-serif">
+        <thead><tr style="background:${headerBg};color:#fff"><th style="padding:8px 10px;text-align:left">তারিখ</th><th style="padding:8px 10px;text-align:left">বিবরণ</th><th style="padding:8px 10px;text-align:right">মাল ৳</th><th style="padding:8px 10px;text-align:right">টাকা ৳</th><th style="padding:8px 10px">নোট</th></tr></thead>
+        <tbody>${rows||'<tr><td colspan="5" style="text-align:center;padding:16px;color:#94a3b8">কোনো লেনদেন নেই</td></tr>'}</tbody>
+      </table></div>
+      <button onclick="window.print()" style="margin-top:14px;width:100%;background:${headerBg};color:#fff;border:none;border-radius:10px;padding:12px;font-size:0.9rem;font-weight:700;cursor:pointer;font-family:Hind Siliguri,sans-serif">🖨️ প্রিন্ট / PDF সেভ করুন</button>
+    </div></div>`;
+  document.body.appendChild(modal);
+}
+
+function printMohReport(id) {
+  const m = D.mohajons.find(x => x.id === id); if (!m) return;
+  const st = mohStats(m);
+  const rows = m.txns.map(t => `<tr><td style="padding:7px 10px">${fdate(t.date)}</td><td style="padding:7px 10px">${t.type==='mal'?'📦 মাল নেওয়া':'💸 টাকা দেওয়া'}</td><td style="color:#ef5350;font-weight:600;text-align:right;padding:7px 10px">${t.type==='mal'?tk(t.amount):''}</td><td style="color:#26c281;font-weight:600;text-align:right;padding:7px 10px">${t.type==='pay'?tk(t.amount):''}</td><td style="font-size:0.8em;color:#64748b;padding:7px 10px">${t.note||''}</td></tr>`).join('');
+  const summary = `<div style="background:#fff8e1;border-radius:9px;padding:10px;text-align:center"><div style="font-size:0.65rem;color:#64748b;font-weight:600;margin-bottom:3px">মাল নেওয়া</div><div style="font-size:1rem;font-weight:700;color:#ef5350">${tk(st.malNeoa)}</div></div><div style="background:#e8faf3;border-radius:9px;padding:10px;text-align:center"><div style="font-size:0.65rem;color:#64748b;font-weight:600;margin-bottom:3px">টাকা দিলাম</div><div style="font-size:1rem;font-weight:700;color:#26c281">${tk(st.tkDilam)}</div></div><div style="background:${st.baki>0?'#ffebee':'#e8faf3'};border-radius:9px;padding:10px;text-align:center"><div style="font-size:0.65rem;color:#64748b;font-weight:600;margin-bottom:3px">বাকি</div><div style="font-size:1rem;font-weight:700;color:${st.baki>0?'#ef5350':'#26c281'}">${tk(Math.abs(st.baki))}</div></div>`;
+  printReport('মহাজন রিপোর্ট', 'linear-gradient(135deg,#9c6fde,#7c5cbf)', m, summary, rows);
+}
+function printPaiReport(id) {
+  const p = D.paikars.find(x => x.id === id); if (!p) return;
+  const st = paiStats(p);
+  const rows = p.txns.map(t => `<tr><td style="padding:7px 10px">${fdate(t.date)}</td><td style="padding:7px 10px">${t.type==='mal'?'📦 মাল দেওয়া':'💵 টাকা নেওয়া'}</td><td style="color:#5b86e5;font-weight:600;text-align:right;padding:7px 10px">${t.type==='mal'?tk(t.amount):''}</td><td style="color:#26c281;font-weight:600;text-align:right;padding:7px 10px">${t.type==='pay'?tk(t.amount):''}</td><td style="font-size:0.8em;color:#64748b;padding:7px 10px">${t.note||''}</td></tr>`).join('');
+  const summary = `<div style="background:#e8eeff;border-radius:9px;padding:10px;text-align:center"><div style="font-size:0.65rem;color:#64748b;font-weight:600;margin-bottom:3px">মাল দিলাম</div><div style="font-size:1rem;font-weight:700;color:#3b6ef5">${tk(st.malDilam)}</div></div><div style="background:#e8faf3;border-radius:9px;padding:10px;text-align:center"><div style="font-size:0.65rem;color:#64748b;font-weight:600;margin-bottom:3px">টাকা নিলাম</div><div style="font-size:1rem;font-weight:700;color:#26c281">${tk(st.tkNilam)}</div></div><div style="background:${st.baki>0?'#ffebee':'#e8faf3'};border-radius:9px;padding:10px;text-align:center"><div style="font-size:0.65rem;color:#64748b;font-weight:600;margin-bottom:3px">বাকি</div><div style="font-size:1rem;font-weight:700;color:${st.baki>0?'#ef5350':'#26c281'}">${tk(Math.abs(st.baki))}</div></div>`;
+  printReport('পাইকার রিপোর্ট', 'linear-gradient(135deg,#74a0f5,#3b6ef5)', p, summary, rows);
+}
+function printKhuReport(id) {
+  const k = D.khuchras.find(x => x.id === id); if (!k) return;
+  const st = khuStats(k);
+  const rows = k.txns.map(t => `<tr><td style="padding:7px 10px">${fdate(t.date)}</td><td style="padding:7px 10px">${t.type==='mal'?'🧾 মাল দেওয়া':'💵 টাকা নেওয়া'}</td><td style="color:#9c6fde;font-weight:600;text-align:right;padding:7px 10px">${t.type==='mal'?tk(t.amount):''}</td><td style="color:#26c281;font-weight:600;text-align:right;padding:7px 10px">${t.type==='pay'?tk(t.amount):''}</td><td style="font-size:0.8em;color:#64748b;padding:7px 10px">${t.note||''}</td></tr>`).join('');
+  const summary = `<div style="background:#f3eeff;border-radius:9px;padding:10px;text-align:center"><div style="font-size:0.65rem;color:#64748b;font-weight:600;margin-bottom:3px">মাল দিলাম</div><div style="font-size:1rem;font-weight:700;color:#9c6fde">${tk(st.malDilam)}</div></div><div style="background:#e8faf3;border-radius:9px;padding:10px;text-align:center"><div style="font-size:0.65rem;color:#64748b;font-weight:600;margin-bottom:3px">টাকা নিলাম</div><div style="font-size:1rem;font-weight:700;color:#26c281">${tk(st.tkNilam)}</div></div><div style="background:${st.baki>0?'#ffebee':'#e8faf3'};border-radius:9px;padding:10px;text-align:center"><div style="font-size:0.65rem;color:#64748b;font-weight:600;margin-bottom:3px">বাকি</div><div style="font-size:1rem;font-weight:700;color:${st.baki>0?'#ef5350':'#26c281'}">${tk(Math.abs(st.baki))}</div></div>`;
+  printReport('খুচরা রিপোর্ট', 'linear-gradient(135deg,#c49fec,#8b5cf6)', k, summary, rows);
+}
+
+// GDRIVE on load
+window.addEventListener('load', function() {
+  const savedToken = localStorage.getItem('gd_token');
+  if (savedToken && GDRIVE_CLIENT_ID) {
+    gAccessToken = savedToken;
+    gdriveLoadUserInfo().then(() => {
+      if (gUserInfo) { gAutoSyncEnabled = true; gdriveUpdateUI(); }
+      else { localStorage.removeItem('gd_token'); gAccessToken = null; gdriveUpdateUI(); }
+    });
+  } else { gdriveUpdateUI(); }
+});
+
+// ===== GLOBAL SEARCH (desktop) =====
+function globalSearchFn(q) {
+  const dd = document.getElementById('searchDropdown');
+  const v = q.trim();
+  if (!v) { dd.classList.remove('show'); dd.innerHTML=''; return; }
+  const results = buildSearchResults(v);
+  renderSearchResults(results, dd, false);
+  dd.classList.add('show');
+}
+function searchGo(i) {
+  const r = window._srResults && window._srResults[i];
+  if(r){ r.action(); document.getElementById('globalSearch').value=''; document.getElementById('searchDropdown').classList.remove('show'); }
+}
+document.addEventListener('click', function(e) {
+  const ts = document.getElementById('topbarSearch');
+  if (ts && !ts.contains(e.target)) { const dd=document.getElementById('searchDropdown'); if(dd) dd.classList.remove('show'); }
+});
+
+// ===== MOBILE SEARCH OVERLAY =====
+function openMobileSearch() {
+  const ov = document.getElementById('mobileSearchOverlay');
+  ov.classList.add('open');
+  setTimeout(() => document.getElementById('mobileSearchInput').focus(), 200);
+}
+function closeMobileSearch() {
+  const ov = document.getElementById('mobileSearchOverlay');
+  ov.classList.remove('open');
+  document.getElementById('mobileSearchInput').value = '';
+  document.getElementById('mobileSearchResults').classList.remove('show');
+  document.getElementById('mobileSearchResults').innerHTML = '';
+}
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('mobileSearchOverlay')) closeMobileSearch();
+}
+function mobileSearchFn(q) {
+  const res = document.getElementById('mobileSearchResults');
+  const v = q.trim();
+  if (!v) { res.classList.remove('show'); res.innerHTML=''; return; }
+  const results = buildSearchResults(v);
+  renderSearchResults(results, res, true);
+  res.classList.add('show');
+}
+function mobileSearchGo(i) {
+  const r = window._srMobile && window._srMobile[i];
+  if(r){ r.action(); closeMobileSearch(); }
+}
+
+// ===== SHARED SEARCH HELPERS =====
+function buildSearchResults(v) {
+  const results = []; const ql = v.toLowerCase();
+  D.mohajons.forEach(m => {
+    if ((m.name||'').toLowerCase().includes(ql)||(m.phone||'').includes(v))
+      results.push({ icon:'🏦', bg:'#f3eeff', name:m.name, sub:m.phone||'', tag:'মহাজন', tagColor:'#9c6fde', tagBg:'#f3eeff', action:()=>{ gotoPage('mohajon',null); setTimeout(()=>openMohDetail(m.id),120); }});
+  });
+  D.paikars.forEach(p => {
+    if ((p.name||'').toLowerCase().includes(ql)||(p.phone||'').includes(v))
+      results.push({ icon:'🛒', bg:'#e8eeff', name:p.name, sub:p.phone||'', tag:'পাইকার', tagColor:'#3b6ef5', tagBg:'#e8eeff', action:()=>{ gotoPage('paikar',null); setTimeout(()=>openPaiDetail(p.id),120); }});
+  });
+  D.khuchras.forEach(k => {
+    if ((k.name||'').toLowerCase().includes(ql)||(k.phone||'').includes(v))
+      results.push({ icon:'🧾', bg:'#f0eaff', name:k.name, sub:k.phone||'', tag:'খুচরা', tagColor:'#8b5cf6', tagBg:'#f3eeff', action:()=>{ gotoPage('khuchra',null); setTimeout(()=>openKhuDetail(k.id),120); }});
+  });
+  return results;
+}
+function renderSearchResults(results, container, isMobile) {
+  const goFn = isMobile ? 'mobileSearchGo' : 'searchGo';
+  const storeKey = isMobile ? '_srMobile' : '_srResults';
+  if (!results.length) {
+    container.innerHTML = `<div class="search-no-result">🔍 কিছু পাওয়া যায়নি</div>`;
+  } else {
+    container.innerHTML = results.slice(0,8).map((r,i) => `
+      <div class="search-result-item" onclick="${goFn}(${i})">
+        <div class="search-result-icon" style="background:${r.bg}">${r.icon}</div>
+        <div><div class="search-result-name">${r.name}</div>${r.sub?`<div class="search-result-sub">${r.sub}</div>`:''}</div>
+        <span class="search-result-tag" style="color:${r.tagColor};background:${r.tagBg}">${r.tag}</span>
+      </div>`).join('');
+    window[storeKey] = results;
+  }
+}
+
+render();
+
+// ===== BUTTON RIPPLE EFFECT =====
+document.addEventListener('click', function(e) {
+  const btn = e.target.closest('.btn');
+  if (!btn) return;
+  const ripple = document.createElement('span');
+  ripple.classList.add('ripple');
+  const rect = btn.getBoundingClientRect();
+  const size = Math.max(rect.width, rect.height);
+  ripple.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX-rect.left-size/2}px;top:${e.clientY-rect.top-size/2}px`;
+  btn.appendChild(ripple);
+  setTimeout(() => ripple.remove(), 600);
+});
+
+// ===== COUNT-UP ANIMATION FOR STAT VALUES =====
+function animateCount(el, target) {
+  if (isNaN(target) || target < 0) return;
+  const duration = 900;
+  const start = performance.now();
+  const startVal = 0;
+  function step(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    // ease out quart
+    const ease = 1 - Math.pow(1 - progress, 4);
+    const current = Math.round(startVal + (target - startVal) * ease);
+    // keep original formatting: replace numbers only
+    el.textContent = el.textContent.replace(/[\d,৳৩২১০৪৫৬৭৮৯,\.]+/, formatBN(current));
+    if (progress < 1) requestAnimationFrame(step);
+    else el.textContent = el._finalText;
+  }
+  requestAnimationFrame(step);
+}
+
+function formatBN(n) {
+  // Bengali digits
+  const bn = ['০','১','২','৩','৪','৫','৬','৭','৮','৯'];
+  return Math.round(n).toString().replace(/\d/g, d => bn[d])
+    .replace(/\B(?=(\d{2})+(?!\d))/g, ',');
+}
+
+// Patch renderDashboard to trigger count-up on stat values
+const _origRenderDash = renderDashboard;
+window.renderDashboard = function() {
+  _origRenderDash();
+  // After render, animate visible stat values
+  setTimeout(() => {
+    document.querySelectorAll('#page-dashboard .stat-value').forEach(el => {
+      const txt = el.textContent;
+      // extract numeric value from Bengali-formatted tk string
+      const ascii = txt.replace(/[০-৯]/g, d => '০১২৩৪৫৬৭৮৯'.indexOf(d)).replace(/[^\d.]/g, '');
+      const val = parseFloat(ascii);
+      if (!isNaN(val) && val > 0) {
+        el._finalText = txt;
+        animateCount(el, val);
+      }
+    });
+  }, 80);
+};
+</script>
+</body>
+</html>
